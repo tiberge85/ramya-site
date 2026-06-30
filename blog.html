@@ -271,27 +271,37 @@ document.getElementById('menu-toggle').addEventListener('click', function() {
 
 // ── Chargement dynamique des articles ────────────────
 async function loadBlog() {
+  const feat = document.getElementById('blog-featured');
+  const grid = document.getElementById('blog-grid');
+  // On masque le contenu statique le temps de charger, pour éviter le clignotement
+  // (ancien texte qui apparaît puis est remplacé).
+  if (feat) feat.style.visibility = 'hidden';
+  if (grid) grid.style.visibility = 'hidden';
+
   let articles = [];
 
-  // 1. localStorage (admin en cours de prévisualisation)
-  const local = localStorage.getItem('ramya_admin_articles');
-  if (local) { try { articles = JSON.parse(local); } catch(e) {} }
+  // 1. Fichier JSON = source de vérité (publié depuis l'admin). On force le rafraîchissement.
+  try {
+    const r = await fetch('data/articles.json', { cache: 'no-store' });
+    if (r.ok) {
+      const j = await r.json();
+      articles = Array.isArray(j) ? j : (j.articles || []);
+    }
+  } catch(e) {}
 
-  // 2. Fichier JSON (source de vérité)
+  // 2. Repli hors-ligne éventuel
   if (!articles.length) {
-    try {
-      const r = await fetch('data/articles.json');
-      if (r.ok) {
-        const j = await r.json();
-        articles = Array.isArray(j) ? j : (j.articles || []);
-      }
-    } catch(e) {}
+    const local = localStorage.getItem('ramya_admin_articles');
+    if (local) { try { articles = JSON.parse(local); } catch(e) {} }
   }
 
-  if (!articles.length) return; // garde le HTML statique si tout échoue
-
-  renderFeatured(articles);
-  renderGrid(articles);
+  if (articles.length) {
+    renderFeatured(articles);
+    renderGrid(articles);
+  }
+  // On réaffiche (soit le contenu rendu, soit le HTML statique si tout a échoué)
+  if (feat) feat.style.visibility = 'visible';
+  if (grid) grid.style.visibility = 'visible';
 }
 
 function fmtDate(d) {
