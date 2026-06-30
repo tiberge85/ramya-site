@@ -1,15 +1,15 @@
 {
   "articles": [
     {
-      "id": "001",
-      "titre": "L'Intelligence Artificielle au cœur de la nouvelle génération de vidéosurveillance",
-      "cat": "Vidéosurveillance",
-      "date": "2025-04-15",
       "auteur": "Équipe Ramya",
-      "lecture": "8 min de lecture",
       "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuAbjrbNP06A-mpD5m4sMpK6kFcNkCs3Qhtzlep5Lh7Y9Wnus4mtEUvhr5R0X8BTCbhGMtkO3Y71-AyT9Lq4ThuNEmVJqqY8XkLRKJ3cQai4mTR4kTJuQUeJ0A-eIrQ-aeC9wy8HDwPmbOgvh3qSWKZFSxf8jNg9xNVmRPsryQ9Ug55nz-mDOCeFo5CcIsAi0Ypa3a4aBvDZfpQPZ1SdIthsaRxIMJIz47sHHuUen5m7oARevazIjfbCmQiRmBRrUgOrSb1DmNDJ",
+      "une": true,
       "resume": "Découvrez comment l'IA transforme les simples caméras en systèmes d'analyse prédictive, réduisant les fausses alertes et améliorant les temps de réponse pour les entreprises ivoiriennes.",
-      "une": true
+      "date": "2025-04-15",
+      "titre": "L'IA au cœur de la nouvelle génération de vidéosurveillance",
+      "cat": "Vidéosurveillance",
+      "id": "001",
+      "lecture": "8 min de lecture"
     },
     {
       "id": "002",
