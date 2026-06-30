@@ -47,3 +47,39 @@ collections:
               - { label: "Image", name: img, widget: image, required: false, hint: "Téléverse une photo ou laisse vide" }
               - { label: "Résumé", name: resume, widget: text }
               - { label: "À la une ?", name: une, widget: boolean, required: false, default: false }
+
+  - name: carte
+    label: "Carte — Installations"
+    files:
+      - name: installations
+        label: "Liste des installations"
+        file: data/installations.json
+        description: "Les points affichés sur la carte des installations."
+        fields:
+          - label: "Installations"
+            name: installations
+            widget: list
+            label_singular: "Installation"
+            summary: "{{fields.nom}} — {{fields.ville}}"
+            fields:
+              - { label: "Identifiant (unique)", name: id, widget: string }
+              - { label: "Nom du site", name: nom, widget: string }
+              - label: "Type"
+                name: type
+                widget: select
+                options:
+                  - Vidéosurveillance
+                  - "Contrôle d'Accès"
+                  - "Sécurité Incendie"
+                  - "Géolocalisation"
+                  - "Sécurité Résidentielle"
+                  - "Systèmes Intégrés"
+              - { label: "Quartier", name: quartier, widget: string, required: false }
+              - { label: "Ville", name: ville, widget: string }
+              - { label: "Pays", name: pays, widget: string, default: "Côte d'Ivoire" }
+              - { label: "Continent", name: continent, widget: string, default: "Afrique" }
+              - { label: "Latitude", name: lat, widget: number, value_type: float, hint: "Ex. 5.3419" }
+              - { label: "Longitude", name: lng, widget: number, value_type: float, hint: "Ex. -3.9958" }
+              - { label: "Date (AAAA-MM)", name: date, widget: string, required: false }
+              - { label: "Équipement", name: equip, widget: string, required: false }
+              - { label: "Description", name: desc, widget: text, required: false }

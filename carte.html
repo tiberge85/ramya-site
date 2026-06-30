@@ -297,15 +297,19 @@ let all = [], markers = [], map, currentFilter = null;
 // ── Chargement données ────────────────────────────────
 async function loadData(){
   // 1. Essai localStorage (depuis admin)
-  const local = localStorage.getItem('ramya_installations');
-  if(local){ try{ all = JSON.parse(local); }catch(e){} }
+  // 1. Fichier JSON = source de vérité (publié depuis l'admin)
+  try{
+    const r = await fetch('data/installations.json', { cache: 'no-store' });
+    if(r.ok){
+      const j = await r.json();
+      all = Array.isArray(j) ? j : (j.installations || []);
+    }
+  }catch(e){}
 
-  // 2. Essai fetch JSON
+  // 2. Repli hors-ligne éventuel
   if(!all.length){
-    try{
-      const r = await fetch('data/installations.json');
-      if(r.ok) all = await r.json();
-    }catch(e){}
+    const local = localStorage.getItem('ramya_installations');
+    if(local){ try{ all = JSON.parse(local); }catch(e){} }
   }
 
   // 3. Demo fallback
