@@ -1,0 +1,54 @@
+{
+  "projets": [
+    {
+      "id": "001",
+      "filtre": "cctv",
+      "categorie": "CCTV & Surveillance",
+      "icone": "videocam",
+      "titre": "Vidéosurveillance - Grand Centre Commercial Abidjan",
+      "image": "images/equipe-ramya-en-action.jpg",
+      "description": "Déploiement de 250 caméras IP haute définition avec analyse vidéo IA pour la gestion des flux et la prévention des vols dans un espace de 50 000 m². Salle de contrôle centralisée avec monitoring 24h/24.",
+      "tags": ["250 caméras", "Analyse IA", "50 000 m²"]
+    },
+    {
+      "id": "002",
+      "filtre": "access",
+      "categorie": "Contrôle d'Accès",
+      "icone": "fingerprint",
+      "titre": "Contrôle d'Accès - Siège Social Entreprise",
+      "image": "images/portiques-detecteur-de-metaux.jpg",
+      "description": "Installation d'un système biométrique et RFID pour sécuriser les zones sensibles d'un siège social accueillant 1200 employés à Plateau, Abidjan.",
+      "tags": ["Biométrie", "1200 employés"]
+    },
+    {
+      "id": "003",
+      "filtre": "perimeter",
+      "categorie": "Protection Périmétrique",
+      "icone": "radar",
+      "titre": "Protection Périmétrique - Site Industriel Zone Franche",
+      "image": "images/portes-et-portails-automatises.jpg",
+      "description": "Sécurisation d'un site industriel de 15 hectares intégrant des caméras thermiques, des barrières infrarouges et un système d'alarme centralisé pour prévenir les intrusions nocturnes et les tentatives de vol.",
+      "tags": ["15ha", "24/7", "0 intrusion"]
+    },
+    {
+      "id": "004",
+      "filtre": "geo",
+      "categorie": "Géolocalisation",
+      "icone": "directions_car",
+      "titre": "Suivi de Flotte - Société de Transport Abidjan",
+      "image": "",
+      "description": "Déploiement d'un système de géolocalisation GPS sur une flotte de 85 véhicules. Tableau de bord centralisé, alertes de vitesse et rapports automatisés d'activité pour optimiser les opérations.",
+      "tags": ["85 véhicules", "Temps Réel", "Alertes SMS"]
+    },
+    {
+      "id": "005",
+      "filtre": "cctv",
+      "categorie": "Sécurité Résidentielle",
+      "icone": "home",
+      "titre": "Sécurisation Résidentielle - Résidence Cocody",
+      "image": "images/systemes-de-videosurveillance.jpg",
+      "description": "Installation complète pour une résidence de standing : 24 caméras extérieures et intérieures, système d'alarme périmétrique, interphone vidéo et application mobile de monitoring à distance.",
+      "tags": ["24 caméras", "App Mobile", "Alarme"]
+    }
+  ]
+}

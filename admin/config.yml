@@ -63,6 +63,40 @@ collections:
               - { label: "Résumé", name: resume, widget: text }
               - { label: "À la une ?", name: une, widget: boolean, required: false, default: false }
 
+  - name: projets
+    label: "Projets — Réalisations"
+    files:
+      - name: projets
+        label: "Liste des projets"
+        file: data/projets.json
+        description: "Ajoute, modifie ou supprime les projets affichés sur la page Projets."
+        fields:
+          - label: "Projets"
+            name: projets
+            widget: list
+            label_singular: "Projet"
+            summary: "{{fields.titre}}"
+            fields:
+              - { label: "Identifiant (unique)", name: id, widget: string }
+              - label: "Catégorie (filtre)"
+                name: filtre
+                widget: select
+                options:
+                  - { label: "Vidéosurveillance", value: "cctv" }
+                  - { label: "Contrôle d'Accès", value: "access" }
+                  - { label: "Protection Périmétrique", value: "perimeter" }
+                  - { label: "Géolocalisation", value: "geo" }
+              - { label: "Nom de la catégorie (affiché)", name: categorie, widget: string, hint: "Ex. CCTV & Surveillance" }
+              - { label: "Icône", name: icone, widget: string, required: false, hint: "Nom d'icône Material, ex. videocam, fingerprint, radar, directions_car, home" }
+              - { label: "Titre", name: titre, widget: string }
+              - { label: "Image", name: image, widget: image, required: false, hint: "Photo du projet (laisse vide pour afficher une icône)" }
+              - { label: "Description", name: description, widget: text }
+              - label: "Tags / chiffres clés"
+                name: tags
+                widget: list
+                required: false
+                field: { label: "Tag", name: tag, widget: string }
+
   - name: carte
     label: "Carte — Installations"
     files:
