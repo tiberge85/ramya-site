@@ -16,10 +16,10 @@ display_url: https://ramyatechnologie.netlify.app
 
 collections:
   - name: parametres
-    label: "Coordonnées du site"
+    label: "Textes & Coordonnées"
     files:
       - name: coordonnees
-        label: "Téléphone, email, adresse"
+        label: "Coordonnées (tél, email, adresse)"
         file: data/site.json
         description: "Ces informations s'appliquent automatiquement sur tout le site (pied de page de chaque page)."
         fields:
@@ -29,6 +29,15 @@ collections:
           - { label: "Email", name: email, widget: string, required: false }
           - { label: "Adresse (ligne 1)", name: adresse, widget: string, required: false }
           - { label: "Ville / Pays (ligne 2)", name: ville, widget: string, required: false }
+          - { label: "— Titre Accueil (principal)", name: accueil_titre, widget: string, required: false }
+          - { label: "— Titre Accueil (partie orange)", name: accueil_titre_accent, widget: string, required: false }
+          - { label: "— Sous-titre Accueil", name: accueil_soustitre, widget: text, required: false }
+          - { label: "— Titre À propos (principal)", name: apropos_titre, widget: string, required: false }
+          - { label: "— Titre À propos (partie orange)", name: apropos_titre_accent, widget: string, required: false }
+          - { label: "— Sous-titre À propos", name: apropos_soustitre, widget: text, required: false }
+          - { label: "— Titre Solutions (principal)", name: solutions_titre, widget: string, required: false }
+          - { label: "— Titre Solutions (partie orange)", name: solutions_titre_accent, widget: string, required: false }
+          - { label: "— Sous-titre Solutions", name: solutions_soustitre, widget: text, required: false }
 
   - name: blog
     label: "Blog — Articles"
