@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: tiberge85/ramya-site
   branch: main
 
 # Langue de l'interface
