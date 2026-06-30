@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À Propos - Ramya Technologie Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#a23f00","primary-container": "#f2650b","on-primary": "#ffffff","on-primary-container": "#4c1a00",
+          "primary-fixed": "#ffdbcc","primary-fixed-dim": "#ffb695","surface-tint": "#a23f00","inverse-primary": "#ffb695",
+          "on-primary-fixed": "#351000","on-primary-fixed-variant": "#7b2f00",
+          "secondary": "#545e76","on-secondary": "#ffffff","secondary-container": "#d7e2ff","on-secondary-container": "#5a647c",
+          "secondary-fixed": "#d7e2ff","secondary-fixed-dim": "#bbc6e2","on-secondary-fixed": "#101b30","on-secondary-fixed-variant": "#3c475d",
+          "tertiary": "#47607e","on-tertiary": "#ffffff","tertiary-container": "#7a93b3","on-tertiary-container": "#0f2b46",
+          "tertiary-fixed": "#d1e4ff","tertiary-fixed-dim": "#afc9ea","on-tertiary-fixed": "#001d36","on-tertiary-fixed-variant": "#2f4865",
+          "background": "#f8f9ff","on-background": "#031d34","surface": "#f8f9ff","on-surface": "#031d34",
+          "surface-variant": "#d1e4ff","on-surface-variant": "#594137","surface-dim": "#c5dcfb","surface-bright": "#f8f9ff",
+          "surface-container-lowest": "#ffffff","surface-container-low": "#eef4ff","surface-container": "#e5efff",
+          "surface-container-high": "#dbe9ff","surface-container-highest": "#d1e4ff",
+          "inverse-surface": "#1b324a","inverse-on-surface": "#e9f1ff",
+          "outline": "#8d7165","outline-variant": "#e1bfb1",
+          "error": "#ba1a1a","on-error": "#ffffff","error-container": "#ffdad6","on-error-container": "#93000a"
+        },
+        borderRadius: { "DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px" },
+        spacing: { "base": "8px","xs": "4px","sm": "12px","md": "24px","lg": "48px","xl": "80px","gutter": "24px","margin": "32px" },
+        fontFamily: { "h1": ["Manrope"],"h2": ["Manrope"],"h3": ["Manrope"],"body-lg": ["Inter"],"body-md": ["Inter"],"label-md": ["Inter"],"button": ["Inter"] },
+        fontSize: {
+          "h1": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+          "h2": ["36px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "h3": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+          "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+          "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+          "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "500" }],
+          "button": ["16px", { lineHeight: "1", fontWeight: "600" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<div id="page-loader" style="position:fixed;inset:0;z-index:9999;background:#1b324a;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease"><img src="logo-ramya.png" style="height:140px;width:auto;margin-bottom:32px;animation:ramya-pulse 2s ease-in-out infinite"><span id="loader-pct" style="font-family:'Manrope',sans-serif;font-size:64px;font-weight:800;color:#ffb695;line-height:1;margin-bottom:20px">0%</span><div style="width:280px;height:4px;background:rgba(255,255,255,0.15);border-radius:9999px;overflow:hidden;margin-bottom:16px"><div id="loader-bar" style="height:100%;background:#f2650b;border-radius:9999px;width:0%;transition:width 0.1s ease"></div></div><p style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.25em;text-transform:uppercase">Chargement en cours…</p></div>
+<style>@keyframes ramya-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(.96)}}</style>
+
+<!-- Navigation -->
+<header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+  <div class="flex justify-between items-center w-full max-w-7xl mx-auto px-6 h-20">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="logo-ramya.png" alt="Logo Ramya" class="h-12 w-auto">
+      <div class="hidden sm:block leading-tight">
+        <div class="font-['Manrope'] text-base font-extrabold text-orange-600 tracking-tight">RAMYA</div>
+        <div class="font-['Manrope'] text-xs font-bold text-[#1a6b6b] tracking-wider">TECHNOLOGIE INNOVATION</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-1 font-['Manrope'] text-sm font-semibold tracking-tight">
+      <a href="index.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Accueil</a>
+      <a href="a-propos.html" class="text-orange-600 border-b-2 border-orange-600 px-3 py-2">À Propos</a>
+      <a href="solutions.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Solutions</a>
+      <a href="projets.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Projets</a>
+      <a href="carte.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Carte</a>
+      <a href="blog.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Blog</a>
+      <a href="contact.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Recrutement</a>
+    </nav>
+    <div class="hidden md:flex">
+      <a href="contact.html" class="bg-primary text-white font-['Inter'] text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm hover:opacity-90 transition-opacity">Obtenir un Devis</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 text-slate-700">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+    <nav class="flex flex-col px-6 py-4 gap-1 font-['Manrope'] text-sm font-semibold">
+      <a href="index.html" class="py-2 hover:text-orange-600 transition-colors">Accueil</a>
+      <a href="a-propos.html" class="py-2 text-orange-600">À Propos</a>
+      <a href="solutions.html" class="py-2 hover:text-orange-600 transition-colors">Solutions</a>
+      <a href="projets.html" class="py-2 hover:text-orange-600 transition-colors">Projets</a>
+      <a href="carte.html" class="py-2 hover:text-orange-600 transition-colors">Carte</a>
+      <a href="blog.html" class="py-2 hover:text-orange-600 transition-colors">Blog</a>
+      <a href="contact.html" class="py-2 hover:text-orange-600 transition-colors">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="py-2 hover:text-orange-600 transition-colors">Recrutement</a>
+      <a href="contact.html" class="mt-2 bg-primary text-white py-2.5 px-4 rounded-lg text-center">Obtenir un Devis</a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-grow">
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="flex flex-col gap-6">
+      <div class="inline-flex items-center gap-2 bg-surface-container text-primary px-3 py-1.5 rounded-full w-max font-['Inter'] text-xs font-medium">
+        <span class="material-symbols-outlined" style="font-size:14px">verified_user</span>
+        Sécurité Électronique depuis 2017
+      </div>
+      <h1 class="font-['Manrope'] text-5xl font-bold text-on-background leading-tight tracking-tight">
+        Pionniers de la sécurité en Côte d'Ivoire
+      </h1>
+      <p class="font-['Inter'] text-lg text-secondary leading-relaxed">
+        Chez Ramya Technologie Innovation, notre mission est de construire les fondations sécuritaires de demain. Nous concevons des solutions robustes et innovantes qui protègent les entreprises et les foyers avec une fiabilité sans compromis, développées et déployées localement en Côte d'Ivoire.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="solutions.html" class="bg-primary text-white font-['Inter'] font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm">
+          Découvrir nos Services
+        </a>
+        <a href="contact.html" class="border-2 border-primary text-primary font-['Inter'] font-semibold px-6 py-3 rounded-lg hover:bg-primary/5 transition-colors">
+          Nous Contacter
+        </a>
+      </div>
+    </div>
+    <div class="relative h-[480px] w-full rounded-xl overflow-hidden shadow-2xl border border-outline-variant/30">
+      <img src="images/infrastructure-technologique-securisee.jpg" alt="Infrastructure technologique sécurisée" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-tr from-inverse-surface/80 via-transparent to-transparent"></div>
+      <div class="absolute bottom-6 left-6">
+        <span class="bg-primary/90 text-white font-['Inter'] text-sm font-semibold px-4 py-2 rounded-lg backdrop-blur-sm">
+          Fondée en 2017 à Abidjan
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-surface-container-low py-14 border-y border-outline-variant/30">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="flex flex-col items-center">
+          <div class="font-['Manrope'] text-4xl font-bold text-primary mb-1">2017</div>
+          <div class="font-['Inter'] text-sm text-secondary">Année de Fondation</div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="font-['Manrope'] text-4xl font-bold text-primary mb-1">500+</div>
+          <div class="font-['Inter'] text-sm text-secondary">Installations Réalisées</div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="font-['Manrope'] text-4xl font-bold text-primary mb-1">200+</div>
+          <div class="font-['Inter'] text-sm text-secondary">Clients Fidèles</div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="font-['Manrope'] text-4xl font-bold text-primary mb-1">100%</div>
+          <div class="font-['Inter'] text-sm text-secondary">Made in Côte d'Ivoire</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos Valeurs -->
+  <section class="py-20 bg-surface-container-low relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="font-['Manrope'] text-4xl font-semibold text-on-background mb-4">Les Piliers de notre Engagement</h2>
+        <p class="font-['Inter'] text-lg text-secondary leading-relaxed">Nos valeurs fondamentales guident chaque décision, chaque installation et chaque interaction avec nos clients.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/50 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden flex flex-col gap-4">
+          <div class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="w-12 h-12 bg-secondary-container text-primary rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined icon-fill">lightbulb</span>
+          </div>
+          <h3 class="font-['Manrope'] text-xl font-semibold text-on-background">Innovation</h3>
+          <p class="font-['Inter'] text-sm text-secondary leading-relaxed">
+            Nous évaluons en permanence les technologies émergentes — IA, IoT, cloud sécurisé — pour proposer des solutions toujours à la pointe et anticiper les menaces de demain.
+          </p>
+        </div>
+        <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/50 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden flex flex-col gap-4">
+          <div class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="w-12 h-12 bg-secondary-container text-primary rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined icon-fill">shield</span>
+          </div>
+          <h3 class="font-['Manrope'] text-xl font-semibold text-on-background">Fiabilité</h3>
+          <p class="font-['Inter'] text-sm text-secondary leading-relaxed">
+            L'intégrité de nos systèmes est non négociable. Nous concevons des architectures à haute disponibilité, robustes face aux coupures, aux tentatives d'intrusion et aux conditions extrêmes.
+          </p>
+        </div>
+        <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/50 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden flex flex-col gap-4">
+          <div class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="w-12 h-12 bg-secondary-container text-primary rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined icon-fill">handshake</span>
+          </div>
+          <h3 class="font-['Manrope'] text-xl font-semibold text-on-background">Proximité</h3>
+          <p class="font-['Inter'] text-sm text-secondary leading-relaxed">
+            Basée à Abidjan, notre équipe intervient rapidement sur le terrain. Nous fonctionnons comme une extension de votre équipe, avec une communication transparente à chaque étape.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notre Histoire -->
+  <section class="py-20 max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-surface-container text-primary px-3 py-1.5 rounded-full w-max font-['Inter'] text-xs font-medium mb-6">
+          <span class="material-symbols-outlined" style="font-size:14px">timeline</span>
+          Notre Parcours
+        </div>
+        <h2 class="font-['Manrope'] text-4xl font-semibold text-on-background mb-8">Une croissance portée par la confiance</h2>
+        <div class="space-y-8">
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-['Manrope'] text-sm font-bold shrink-0">17</div>
+              <div class="w-px bg-outline-variant flex-grow mt-2"></div>
+            </div>
+            <div class="pb-8">
+              <div class="font-['Manrope'] text-base font-semibold text-on-background mb-1">2017 — Fondation</div>
+              <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Création de Ramya Technologie Innovation à Cocody, Abidjan. Premiers déploiements de systèmes de vidéosurveillance pour des clients résidentiels.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-['Manrope'] text-sm font-bold shrink-0">19</div>
+              <div class="w-px bg-outline-variant flex-grow mt-2"></div>
+            </div>
+            <div class="pb-8">
+              <div class="font-['Manrope'] text-base font-semibold text-on-background mb-1">2019 — Expansion Professionnelle</div>
+              <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Extension aux solutions professionnelles : contrôle d'accès biométrique, géolocalisation de flottes et sécurité périmétrique pour PME et grandes entreprises.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-['Manrope'] text-sm font-bold shrink-0">22</div>
+              <div class="w-px bg-outline-variant flex-grow mt-2"></div>
+            </div>
+            <div class="pb-8">
+              <div class="font-['Manrope'] text-base font-semibold text-on-background mb-1">2022 — Intégration IA</div>
+              <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Intégration des technologies d'analyse vidéo par intelligence artificielle : détection comportementale, reconnaissance faciale et analyse thermique.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-['Manrope'] text-sm font-bold shrink-0">25</div>
+            </div>
+            <div>
+              <div class="font-['Manrope'] text-base font-semibold text-on-background mb-1">2025 — Leader Régional</div>
+              <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Plus de 500 installations réalisées, 200+ clients fidèles. Ramya s'impose comme un acteur de référence de la sécurité électronique en Côte d'Ivoire.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative rounded-xl overflow-hidden">
+        <img src="images/equipe-ramya-en-action.jpg" alt="Équipe Ramya en action" class="w-full object-cover" style="height:500px">
+        <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6">
+          <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+            <p class="font-['Manrope'] text-lg font-semibold text-white mb-1">"Protégé... partout où vous êtes"</p>
+            <p class="font-['Inter'] text-sm text-secondary-fixed-dim">La promesse de Ramya Technologie Innovation depuis 2017</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notre Équipe -->
+  <section class="py-20 bg-surface max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      <div class="max-w-xl">
+        <h2 class="font-['Manrope'] text-4xl font-semibold text-on-background mb-4">Notre Équipe d'Experts</h2>
+        <p class="font-['Inter'] text-base text-secondary leading-relaxed">Des techniciens certifiés et des ingénieurs passionnés au service de votre sécurité. Notre équipe allie expertise technique et connaissance du terrain ivoirien.</p>
+      </div>
+      <a href="contact.html" class="border-2 border-primary text-primary font-['Inter'] font-semibold px-6 py-3 rounded-lg hover:bg-primary/5 transition-colors hidden md:block">
+        Rejoindre l'Équipe
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="group cursor-pointer">
+        <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 relative bg-surface-container">
+          <img src="images/directeur-general.jpg" alt="Directeur Général" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+        </div>
+        <h3 class="font-['Manrope'] text-lg font-semibold text-on-background mb-1">Directeur Général</h3>
+        <p class="font-['Inter'] text-sm font-medium text-primary mb-1">Direction & Stratégie</p>
+        <p class="font-['Inter'] text-sm text-secondary">15+ ans dans la sécurité électronique en Afrique de l'Ouest.</p>
+      </div>
+      <div class="group cursor-pointer">
+        <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 relative bg-surface-container">
+          <img src="images/directrice-technique.jpg" alt="Directrice Technique" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+        </div>
+        <h3 class="font-['Manrope'] text-lg font-semibold text-on-background mb-1">Directrice Technique</h3>
+        <p class="font-['Inter'] text-sm font-medium text-primary mb-1">Ingénierie & R&D</p>
+        <p class="font-['Inter'] text-sm text-secondary">Experte en systèmes intégrés et IA vidéo.</p>
+      </div>
+      <div class="group cursor-pointer">
+        <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 relative bg-surface-container">
+          <img src="images/responsable-deploiement.jpg" alt="Responsable Déploiement" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+        </div>
+        <h3 class="font-['Manrope'] text-lg font-semibold text-on-background mb-1">Responsable Déploiement</h3>
+        <p class="font-['Inter'] text-sm font-medium text-primary mb-1">Opérations Terrain</p>
+        <p class="font-['Inter'] text-sm text-secondary">Coordonne toutes les installations et la maintenance.</p>
+      </div>
+      <div class="group cursor-pointer">
+        <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-4 relative bg-surface-container flex items-center justify-center border border-dashed border-outline-variant">
+          <div class="text-center p-4">
+            <div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center mx-auto mb-3 text-secondary">
+              <span class="material-symbols-outlined">person_add</span>
+            </div>
+            <span class="font-['Inter'] text-sm font-medium text-secondary block">Nous recrutons</span>
+            <a href="contact.html" class="font-['Inter'] text-sm font-medium text-primary underline mt-1 block">Voir les postes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-inverse-surface py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-['Manrope'] text-3xl font-semibold text-white mb-4">Construisons ensemble votre sécurité</h2>
+      <p class="font-['Inter'] text-lg text-secondary-fixed-dim mb-8 max-w-2xl mx-auto">Rejoignez les 200+ clients qui font confiance à Ramya Technologie Innovation pour protéger leurs biens et leurs proches.</p>
+      <a href="contact.html" class="bg-primary text-white font-['Inter'] font-semibold px-8 py-4 rounded-lg hover:bg-surface-tint transition-colors shadow-lg inline-block">
+        Démarrer Votre Projet
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300">
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="mb-4">
+          <img src="logo-ramya.png" alt="Ramya Technologie Innovation" class="h-16 w-auto bg-white rounded-xl p-2">
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed mb-5">Spécialisée dans la sécurité électronique et la domotique depuis 2017.<br><em class="text-orange-400">"Protégé... partout où vous êtes"</em></p>
+        <div class="flex gap-3">
+          <a href="https://www.facebook.com/ramyatechinnovation" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-orange-600 rounded-lg flex items-center justify-center transition-colors"><span class="font-bold text-xs">f</span></a>
+          <a href="https://www.instagram.com/ramyatechnology" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-orange-600 rounded-lg flex items-center justify-center transition-colors"><span class="material-symbols-outlined" style="font-size:16px">photo_camera</span></a>
+          <a href="https://wa.me/2250950243" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"><span class="material-symbols-outlined" style="font-size:16px">chat</span></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Liens Rapides</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="index.html" class="hover:text-orange-400 transition-colors">Accueil</a></li>
+          <li><a href="a-propos.html" class="hover:text-orange-400 transition-colors">À Propos</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Nos Solutions</a></li>
+          <li><a href="projets.html" class="hover:text-orange-400 transition-colors">Projets & Réalisations</a></li>
+          <li><a href="blog.html" class="hover:text-orange-400 transition-colors">Blog & Actualités</a></li>
+          <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact</a></li>
+          <li><a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="hover:text-orange-400 transition-colors">Recrutement</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Nos Services</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Vidéosurveillance CCTV</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Contrôle d'Accès</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Géolocalisation GPS</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Sécurité Incendie</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Dépannage & Maintenance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Nous Contacter</h4>
+        <ul class="space-y-4 text-sm">
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">location_on</span>
+            <span class="text-slate-400">813 Route d'Abatta, Cocody<br>Abidjan, Côte d'Ivoire</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">phone</span>
+            <span class="text-slate-400">+225 27 22 20 44 98<br>+225 07 09 50 02 43</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">mail</span>
+            <a href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400 transition-colors">infos@ramyatechnologie.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+      <p>© 2025 Ramya Technologie Innovation. Tous droits réservés.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-orange-400 transition-colors">Politique de Confidentialité</a>
+        <a href="#" class="hover:text-orange-400 transition-colors">Conditions d'Utilisation</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+</script>
+<script>(function(){var l=document.getElementById('page-loader');if(sessionStorage.getItem('ramya_loaded')){l.style.display='none';return;}sessionStorage.setItem('ramya_loaded','1');var p=document.getElementById('loader-pct'),b=document.getElementById('loader-bar'),c=0;var iv=setInterval(function(){c+=Math.random()*10+2;if(c>=100){c=100;clearInterval(iv);setTimeout(function(){l.style.opacity='0';setTimeout(function(){l.style.display='none'},600)},400);}p.textContent=Math.floor(c)+'%';b.style.width=c+'%';},60);})();</script>
+</body>
+</html>

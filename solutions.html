@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Solutions - Ramya Technologie Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#a23f00","primary-container": "#f2650b","on-primary": "#ffffff","on-primary-container": "#4c1a00",
+          "primary-fixed": "#ffdbcc","primary-fixed-dim": "#ffb695","surface-tint": "#a23f00","inverse-primary": "#ffb695",
+          "on-primary-fixed": "#351000","on-primary-fixed-variant": "#7b2f00",
+          "secondary": "#545e76","on-secondary": "#ffffff","secondary-container": "#d7e2ff","on-secondary-container": "#5a647c",
+          "secondary-fixed": "#d7e2ff","secondary-fixed-dim": "#bbc6e2","on-secondary-fixed": "#101b30","on-secondary-fixed-variant": "#3c475d",
+          "tertiary": "#47607e","on-tertiary": "#ffffff","tertiary-container": "#7a93b3","on-tertiary-container": "#0f2b46",
+          "tertiary-fixed": "#d1e4ff","tertiary-fixed-dim": "#afc9ea","on-tertiary-fixed": "#001d36","on-tertiary-fixed-variant": "#2f4865",
+          "background": "#f8f9ff","on-background": "#031d34","surface": "#f8f9ff","on-surface": "#031d34",
+          "surface-variant": "#d1e4ff","on-surface-variant": "#594137","surface-dim": "#c5dcfb","surface-bright": "#f8f9ff",
+          "surface-container-lowest": "#ffffff","surface-container-low": "#eef4ff","surface-container": "#e5efff",
+          "surface-container-high": "#dbe9ff","surface-container-highest": "#d1e4ff",
+          "inverse-surface": "#1b324a","inverse-on-surface": "#e9f1ff",
+          "outline": "#8d7165","outline-variant": "#e1bfb1",
+          "error": "#ba1a1a","on-error": "#ffffff","error-container": "#ffdad6","on-error-container": "#93000a"
+        },
+        borderRadius: { "DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px" },
+        spacing: { "base": "8px","xs": "4px","sm": "12px","md": "24px","lg": "48px","xl": "80px","gutter": "24px","margin": "32px" },
+        fontFamily: { "h1": ["Manrope"],"h2": ["Manrope"],"h3": ["Manrope"],"body-lg": ["Inter"],"body-md": ["Inter"],"label-md": ["Inter"],"button": ["Inter"] },
+        fontSize: {
+          "h1": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+          "h2": ["36px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "h3": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+          "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+          "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+          "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "500" }],
+          "button": ["16px", { lineHeight: "1", fontWeight: "600" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .sol-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .sol-card:hover { transform: translateY(-4px); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+
+<!-- Loader -->
+<div id="page-loader" style="position:fixed;inset:0;z-index:9999;background:#1b324a;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease"><img src="logo-ramya.png" style="height:140px;width:auto;margin-bottom:32px;animation:ramya-pulse 2s ease-in-out infinite"><span id="loader-pct" style="font-family:'Manrope',sans-serif;font-size:64px;font-weight:800;color:#ffb695;line-height:1;margin-bottom:20px">0%</span><div style="width:280px;height:4px;background:rgba(255,255,255,0.15);border-radius:9999px;overflow:hidden;margin-bottom:16px"><div id="loader-bar" style="height:100%;background:#f2650b;border-radius:9999px;width:0%;transition:width 0.1s ease"></div></div><p style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.25em;text-transform:uppercase">Chargement en cours…</p></div>
+<style>@keyframes ramya-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(.96)}}</style>
+
+<!-- Navigation -->
+<header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+  <div class="flex justify-between items-center w-full max-w-7xl mx-auto px-6 h-20">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="logo-ramya.png" alt="Logo Ramya" class="h-12 w-auto">
+      <div class="hidden sm:block leading-tight">
+        <div class="font-['Manrope'] text-base font-extrabold text-orange-600 tracking-tight">RAMYA</div>
+        <div class="font-['Manrope'] text-xs font-bold text-[#1a6b6b] tracking-wider">TECHNOLOGIE INNOVATION</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-1 font-['Manrope'] text-sm font-semibold tracking-tight">
+      <a href="index.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Accueil</a>
+      <a href="a-propos.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">À Propos</a>
+      <a href="solutions.html" class="text-orange-600 border-b-2 border-orange-600 px-3 py-2">Solutions</a>
+      <a href="projets.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Projets</a>
+      <a href="carte.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Carte</a>
+      <a href="blog.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Blog</a>
+      <a href="contact.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Recrutement</a>
+    </nav>
+    <div class="hidden md:flex">
+      <a href="contact.html" class="bg-primary text-white font-['Inter'] text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm hover:opacity-90 transition-opacity">Obtenir un Devis</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 text-slate-700">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+    <nav class="flex flex-col px-6 py-4 gap-1 font-['Manrope'] text-sm font-semibold">
+      <a href="index.html" class="py-2 hover:text-orange-600 transition-colors">Accueil</a>
+      <a href="a-propos.html" class="py-2 hover:text-orange-600 transition-colors">À Propos</a>
+      <a href="solutions.html" class="py-2 text-orange-600">Solutions</a>
+      <a href="projets.html" class="py-2 hover:text-orange-600 transition-colors">Projets</a>
+      <a href="carte.html" class="py-2 hover:text-orange-600 transition-colors">Carte</a>
+      <a href="blog.html" class="py-2 hover:text-orange-600 transition-colors">Blog</a>
+      <a href="contact.html" class="py-2 hover:text-orange-600 transition-colors">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="py-2 hover:text-orange-600 transition-colors">Recrutement</a>
+      <a href="contact.html" class="mt-2 bg-primary text-white py-2.5 px-4 rounded-lg text-center">Obtenir un Devis</a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-grow flex flex-col">
+
+  <!-- Hero -->
+  <section class="relative bg-inverse-surface text-white py-20 px-6 overflow-hidden">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 70% 0%, rgba(242,101,11,0.18) 0%, transparent 60%)"></div>
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/80 px-4 py-1.5 rounded-full mb-6">
+        <span class="material-symbols-outlined" style="font-size:16px">verified</span>
+        <span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Catalogue Complet 2025</span>
+      </div>
+      <h1 class="font-['Manrope'] text-5xl md:text-6xl font-bold text-white leading-tight mb-6 max-w-4xl mx-auto">
+        17 Solutions de Sécurité<br><span class="text-[#ffb695]">pour chaque besoin</span>
+      </h1>
+      <p class="font-['Inter'] text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mb-8">
+        De la vidéosurveillance à la biométrie, du suivi GPS aux réseaux informatiques — Ramya Technologie couvre l'intégralité de votre sécurité électronique.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="contact.html" class="bg-primary text-white font-['Inter'] font-semibold px-7 py-3 rounded-xl hover:bg-[#f2650b] transition-colors shadow-lg">Demander un Devis Gratuit</a>
+        <a href="projets.html" class="border border-white/30 text-white font-['Inter'] font-semibold px-7 py-3 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px">play_circle</span> Voir nos Réalisations
+        </a>
+      </div>
+      <!-- Stats strip -->
+      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+        <div class="bg-white/5 px-6 py-5 text-center">
+          <div class="font-['Manrope'] text-3xl font-bold text-[#ffb695]">17</div>
+          <div class="font-['Inter'] text-xs text-white/50 mt-1 uppercase tracking-wide">Solutions</div>
+        </div>
+        <div class="bg-white/5 px-6 py-5 text-center">
+          <div class="font-['Manrope'] text-3xl font-bold text-[#ffb695]">8+</div>
+          <div class="font-['Inter'] text-xs text-white/50 mt-1 uppercase tracking-wide">Années d'expérience</div>
+        </div>
+        <div class="bg-white/5 px-6 py-5 text-center">
+          <div class="font-['Manrope'] text-3xl font-bold text-[#ffb695]">500+</div>
+          <div class="font-['Inter'] text-xs text-white/50 mt-1 uppercase tracking-wide">Installations</div>
+        </div>
+        <div class="bg-white/5 px-6 py-5 text-center">
+          <div class="font-['Manrope'] text-3xl font-bold text-[#ffb695]">24/7</div>
+          <div class="font-['Inter'] text-xs text-white/50 mt-1 uppercase tracking-wide">Support Client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="py-20 px-6 bg-[#f0f4fa]">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="mb-12 text-center">
+        <h2 class="font-['Manrope'] text-4xl font-bold text-on-surface mb-3">Notre Gamme Complète</h2>
+        <p class="font-['Inter'] text-lg text-on-surface-variant max-w-xl mx-auto">Modulaires, évolutifs et garantis. Choisissez votre solution ou combinez plusieurs systèmes pour une protection totale.</p>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- 01 - Vidéosurveillance CCTV (image card, col-span-2) -->
+        <div class="lg:col-span-2 sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-60 relative overflow-hidden">
+            <img src="images/systemes-de-videosurveillance.jpg" alt="Systèmes de vidéosurveillance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm text-white font-['Inter'] text-xs font-bold px-3 py-1 rounded-full">01</span>
+            <div class="absolute bottom-4 left-4 flex gap-2">
+              <span class="bg-white/20 backdrop-blur-sm text-white font-['Inter'] text-xs px-2.5 py-1 rounded-md border border-white/30">Analyse IA</span>
+              <span class="bg-white/20 backdrop-blur-sm text-white font-['Inter'] text-xs px-2.5 py-1 rounded-md border border-white/30">4K HD</span>
+              <span class="bg-white/20 backdrop-blur-sm text-white font-['Inter'] text-xs px-2.5 py-1 rounded-md border border-white/30">Vision Nocturne</span>
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:22px">videocam</span>
+              <h3 class="font-['Manrope'] text-xl font-bold text-on-surface">Systèmes de Vidéosurveillance</h3>
+            </div>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Caméras IP haute définition avec analyse vidéo par intelligence artificielle, vision thermique et tableau de bord centralisé. Idéal pour commerces, résidences, hôpitaux et infrastructures industrielles.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-primary font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 02 - Contrôle d'Accès (image card, col-span-1) -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-60 relative overflow-hidden">
+            <img src="images/controle-d-acces-biometrique.jpg" alt="Contrôle d'accès biométrique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-[#1b324a]/90 backdrop-blur-sm text-white font-['Inter'] text-xs font-bold px-3 py-1 rounded-full">02</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#1b324a]" style="font-size:22px">vpn_key</span>
+              <h3 class="font-['Manrope'] text-xl font-bold text-on-surface">Contrôle d'Accès</h3>
+            </div>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Lecteurs biométriques, badges RFID et serrures connectées pour sécuriser vos zones sensibles et gérer les flux en temps réel.</p>
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="bg-gray-100 text-gray-700 font-['Inter'] text-xs px-2.5 py-1 rounded-md">Biométrie</span>
+              <span class="bg-gray-100 text-gray-700 font-['Inter'] text-xs px-2.5 py-1 rounded-md">RFID</span>
+            </div>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-[#1b324a] font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 03 - Pointage Biométrique -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/pointage-biometrique.jpg" alt="Pointage biométrique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">fingerprint</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">03</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Pointage Biométrique</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Gestion des présences du personnel par empreinte digitale ou reconnaissance faciale. Rapports automatisés et intégration avec les logiciels RH.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-[#1b324a] font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 04 - Clôture Électrique -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/cloture-electrique.jpg" alt="Clôture électrique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">electric_bolt</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">04</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Clôture Électrique</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Systèmes de dissuasion périmétrique haute tension adaptés aux villas, entreprises et zones industrielles. Détection instantanée des intrusions avec alarme sonore.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-amber-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 05 - Portes Blindées -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/portes-blindees.jpg" alt="Portes blindées" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">door_front</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">05</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Portes Blindées</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Portes haute résistance aux tentatives d'effraction, certifiées aux normes de sécurité internationales. Installation sur mesure pour tous types d'accès résidentiels et commerciaux.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-slate-600 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 06 - Portier Vidéo -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/infrastructure-technologique-securisee.jpg" alt="Portier vidéo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">video_camera_front</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">06</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Portier Vidéo</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Interphones vidéo HD pour identifier et contrôler les visiteurs à distance depuis votre smartphone ou poste intérieur. Installation simple, image nette même la nuit.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-blue-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 07 - Sécurité Incendie SSI -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/directrice-technique.jpg" alt="Sécurité incendie SSI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined icon-fill text-white" style="font-size:18px">local_fire_department</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">07</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Sécurité Incendie (SSI)</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Détecteurs de fumée, centrales d'alarme et systèmes d'extinction automatique conformes aux normes. Pour ERP, bureaux, résidences et industries.</p>
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="bg-red-50 text-red-700 font-['Inter'] text-xs px-2.5 py-1 rounded-md">Détection</span>
+              <span class="bg-red-50 text-red-700 font-['Inter'] text-xs px-2.5 py-1 rounded-md">Extinction Auto</span>
+            </div>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-red-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 08 - Poignées Intelligentes -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/equipe-ramya-en-action.jpg" alt="Poignées intelligentes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">key</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">08</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Poignées Intelligentes</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Verrous connectés pilotables via smartphone avec codes PIN, cartes RFID et lecture d'empreinte. Compatibles iOS et Android. Journal d'accès intégré.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-emerald-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 09 - Alarme Anti-Intrusion -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/directeur-general.jpg" alt="Alarme anti-intrusion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">notification_important</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">09</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Alarme Anti-Intrusion</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Détecteurs de mouvement, capteurs d'ouverture et sirènes pour une protection totale de vos locaux. Alertes SMS, appels automatiques et notifications push instantanées.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-primary font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 10 - Autocommutateurs -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/autocommutateurs-pabx.jpg" alt="Autocommutateurs PABX" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">phone_in_talk</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">10</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Autocommutateurs PABX</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Solutions de téléphonie d'entreprise numériques et analogiques. Installation, configuration de postes, messagerie vocale et maintenance incluses.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-violet-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 11 - Portiques Détecteur de Métaux -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/portiques-detecteur-de-metaux.jpg" alt="Portiques détecteur de métaux" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">sensors</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">11</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Portiques Détecteur de Métaux</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Archways et portiques de détection pour sécuriser les entrées de bâtiments, hôtels, administrations et institutions. Modèles fixes ou portables disponibles.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-blue-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 12 - Portes et Portails Automatisés -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/portes-et-portails-automatises.jpg" alt="Portes et portails automatisés" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">garage</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">12</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Portes & Portails Automatisés</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Automatisation de portes coulissantes, sectionnelles, basculantes et portails de résidences. Télécommande, badge, détection de présence et sécurité anti-écrasement.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-emerald-800 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 13 - Coffres-Forts -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/responsable-deploiement.jpg" alt="Coffres-forts" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">lock</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">13</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Coffres-Forts</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Coffres ignifuges et anti-effraction pour particuliers et entreprises. Serrure électronique ou mécanique certifiée. Différentes tailles et capacités disponibles.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-amber-800 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 14 - Fournitures Informatiques -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/fournitures-informatiques.jpg" alt="Fournitures informatiques" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">computer</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">14</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Fournitures Informatiques</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Ordinateurs, serveurs, accessoires et périphériques pour équiper votre infrastructure IT. Marques reconnues, garanties constructeur et service après-vente inclus.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-sky-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 15 - SAS de Sécurité -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/sas-de-securite.jpg" alt="SAS de sécurité" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">meeting_room</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">15</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">SAS de Sécurité</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Sas de neutralisation pour contrôler les accès sensibles et prévenir le passage simultané non autorisé. Idéal pour banques, coffres-forts et institutions gouvernementales.</p>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-primary font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 16 - Tracking Véhicule -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/equipe-ramya-en-action.jpg" alt="Tracking véhicule GPS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">directions_car</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">16</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Tracking Véhicule GPS</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Balises GPS temps réel pour flottes de véhicules. Historique des trajets, alertes de zones géographiques et rapports de kilométrage. Application mobile dédiée.</p>
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="bg-green-50 text-green-800 font-['Inter'] text-xs px-2.5 py-1 rounded-md">Temps Réel</span>
+              <span class="bg-green-50 text-green-800 font-['Inter'] text-xs px-2.5 py-1 rounded-md">Alertes SMS</span>
+            </div>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-emerald-800 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+        <!-- 17 - Réseau Informatique -->
+        <div class="sol-card bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl overflow-hidden group flex flex-col">
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/portiques-detecteur-de-metaux.jpg" alt="Réseau informatique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 w-9 h-9 bg-black/30 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <span class="material-symbols-outlined text-white" style="font-size:18px">hub</span>
+            </div>
+            <span class="absolute top-3 right-3 font-['Inter'] text-white text-xs font-bold bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-lg">17</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2">Réseau Informatique</h3>
+            <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">Conception, installation et maintenance d'infrastructures réseau LAN/WAN, Wi-Fi d'entreprise et VPN. Solutions Cisco, TP-Link, Ubiquiti avec câblage structuré.</p>
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="bg-teal-50 text-teal-800 font-['Inter'] text-xs px-2.5 py-1 rounded-md">LAN/WAN</span>
+              <span class="bg-teal-50 text-teal-800 font-['Inter'] text-xs px-2.5 py-1 rounded-md">Wi-Fi</span>
+              <span class="bg-teal-50 text-teal-800 font-['Inter'] text-xs px-2.5 py-1 rounded-md">VPN</span>
+            </div>
+            <a href="contact.html" class="inline-flex items-center gap-1 text-teal-700 font-['Inter'] text-sm font-semibold hover:gap-2 transition-all mt-auto w-max">Demander un devis <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span></a>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+    </div>
+  </section>
+
+  <!-- Pourquoi nous choisir -->
+  <section class="py-20 bg-white px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="font-['Manrope'] text-4xl font-bold text-on-background mb-4">Pourquoi choisir Ramya ?</h2>
+        <p class="font-['Inter'] text-lg text-secondary leading-relaxed">Depuis 2017, nous accompagnons particuliers et entreprises avec des solutions fiables et un service de proximité.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-[#f0f4fa] p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="w-12 h-12 bg-orange-100 text-primary rounded-xl flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined icon-fill">lightbulb</span>
+          </div>
+          <h3 class="font-['Manrope'] text-xl font-bold text-on-background mb-2">Innovation Constante</h3>
+          <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Nous utilisons les dernières technologies (IA, IoT, Cloud) pour vous offrir des solutions à la pointe de la sécurité électronique.</p>
+        </div>
+        <div class="bg-[#f0f4fa] p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="w-12 h-12 bg-orange-100 text-primary rounded-xl flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined icon-fill">shield</span>
+          </div>
+          <h3 class="font-['Manrope'] text-xl font-bold text-on-background mb-2">Fiabilité Garantie</h3>
+          <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Nos systèmes utilisent exclusivement des équipements de marques reconnues : Hikvision, Dahua, Axis, Bosch, Cisco. Garantie et SAV inclus.</p>
+        </div>
+        <div class="bg-[#f0f4fa] p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="w-12 h-12 bg-orange-100 text-primary rounded-xl flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined icon-fill">support_agent</span>
+          </div>
+          <h3 class="font-['Manrope'] text-xl font-bold text-on-background mb-2">Service de Proximité</h3>
+          <p class="font-['Inter'] text-sm text-secondary leading-relaxed">Basés à Cocody, Abidjan, notre équipe intervient rapidement partout. Support technique disponible 24h/24, 7j/7 par WhatsApp et téléphone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-inverse-surface py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="material-symbols-outlined text-[#ffb695] icon-fill" style="font-size:48px">security</span>
+      <h2 class="font-['Manrope'] text-3xl font-bold text-white mt-4 mb-4">Prêt à sécuriser vos installations ?</h2>
+      <p class="font-['Inter'] text-lg text-white/60 mb-8 max-w-2xl mx-auto">Contactez notre équipe d'ingénieurs pour un audit gratuit et une proposition sur mesure adaptée à votre budget.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="bg-primary text-white font-['Inter'] font-semibold px-8 py-4 rounded-xl hover:bg-[#f2650b] transition-colors shadow-lg">Demander un Audit Gratuit</a>
+        <a href="tel:+22527222044 98" class="border border-white/30 text-white font-['Inter'] font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px">phone</span> Nous Appeler
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300">
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="mb-4">
+          <img src="logo-ramya.png" alt="Ramya Technologie Innovation" class="h-16 w-auto bg-white rounded-xl p-2">
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed mb-5">Spécialisée dans la sécurité électronique et la domotique depuis 2017.<br><em class="text-orange-400">"Protégé... partout où vous êtes"</em></p>
+        <div class="flex gap-3">
+          <a href="https://www.facebook.com/ramyatechinnovation" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-orange-600 rounded-lg flex items-center justify-center transition-colors"><span class="font-bold text-xs">f</span></a>
+          <a href="https://www.instagram.com/ramyatechnology" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-orange-600 rounded-lg flex items-center justify-center transition-colors"><span class="material-symbols-outlined" style="font-size:16px">photo_camera</span></a>
+          <a href="https://wa.me/2250950243" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"><span class="material-symbols-outlined" style="font-size:16px">chat</span></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Liens Rapides</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="index.html" class="hover:text-orange-400 transition-colors">Accueil</a></li>
+          <li><a href="a-propos.html" class="hover:text-orange-400 transition-colors">À Propos</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Nos Solutions</a></li>
+          <li><a href="projets.html" class="hover:text-orange-400 transition-colors">Projets & Réalisations</a></li>
+          <li><a href="blog.html" class="hover:text-orange-400 transition-colors">Blog & Actualités</a></li>
+          <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact</a></li>
+          <li><a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="hover:text-orange-400 transition-colors">Recrutement</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Nos Solutions</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Vidéosurveillance CCTV</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Contrôle d'Accès & Biométrie</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Alarme Anti-Intrusion</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Sécurité Incendie SSI</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Tracking GPS Véhicule</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Réseau Informatique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Nous Contacter</h4>
+        <ul class="space-y-4 text-sm">
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">location_on</span>
+            <span class="text-slate-400">813 Route d'Abatta, Cocody<br>Abidjan, Côte d'Ivoire</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">phone</span>
+            <span class="text-slate-400">+225 27 22 20 44 98<br>+225 07 09 50 02 43</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">mail</span>
+            <a href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400 transition-colors">infos@ramyatechnologie.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+      <p>© 2025 Ramya Technologie Innovation. Tous droits réservés.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-orange-400 transition-colors">Politique de Confidentialité</a>
+        <a href="#" class="hover:text-orange-400 transition-colors">Conditions d'Utilisation</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+</script>
+<script>(function(){var l=document.getElementById('page-loader');if(sessionStorage.getItem('ramya_loaded')){l.style.display='none';return;}sessionStorage.setItem('ramya_loaded','1');var p=document.getElementById('loader-pct'),b=document.getElementById('loader-bar'),c=0;var iv=setInterval(function(){c+=Math.random()*10+2;if(c>=100){c=100;clearInterval(iv);setTimeout(function(){l.style.opacity='0';setTimeout(function(){l.style.display='none'},600)},400);}p.textContent=Math.floor(c)+'%';b.style.width=c+'%';},60);})();</script>
+</body>
+</html>

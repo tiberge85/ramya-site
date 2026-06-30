@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration — Ramya Technologie Innovation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+  .icon-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+  .nav-btn.active{background:rgba(255,255,255,0.15);color:#ffb695}
+  .nav-btn{transition:all 0.15s}
+  .step-num{min-width:2rem;min-height:2rem}
+  code{font-family:'Courier New',monospace}
+</style>
+</head>
+<body class="bg-gray-50 font-['Inter'] antialiased">
+
+<!-- ═══════════════════════ LOGIN ═══════════════════════ -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center" style="background:#1b324a">
+  <div class="bg-white rounded-2xl p-10 w-full max-w-md shadow-2xl text-center">
+    <img src="logo-ramya.png" class="h-24 w-auto mx-auto mb-6" onerror="this.style.display='none'">
+    <h1 class="font-['Manrope'] text-2xl font-bold text-[#1b324a] mb-1">Espace Administration</h1>
+    <p class="text-gray-400 text-sm mb-7">Ramya Technologie Innovation</p>
+    <input type="password" id="pwd-input" placeholder="Mot de passe administrateur"
+      class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+      onkeydown="if(event.key==='Enter')doLogin()">
+    <div id="login-error" class="hidden text-red-500 text-sm mb-3">❌ Mot de passe incorrect</div>
+    <button onclick="doLogin()" class="w-full bg-[#a23f00] hover:bg-[#f2650b] text-white font-semibold py-3 rounded-xl transition-colors">
+      Se connecter
+    </button>
+    <p class="text-xs text-gray-400 mt-5">Mot de passe par défaut : <strong>Ramya2025</strong></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════ DASHBOARD ═══════════════════════ -->
+<div id="dashboard" class="hidden min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 shrink-0 flex flex-col" style="background:#1b324a">
+    <div class="p-6 border-b border-white/10">
+      <img src="logo-ramya.png" class="h-12 w-auto bg-white rounded-xl p-1.5 mb-3" onerror="this.style.display='none'">
+      <div class="font-['Manrope'] text-xs font-extrabold tracking-widest uppercase" style="color:#ffb695">Administration</div>
+    </div>
+    <nav class="p-4 flex flex-col gap-1 flex-grow overflow-y-auto">
+      <button onclick="showTab('blog')"    class="nav-btn text-white/80 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left hover:bg-white/10">
+        <span class="material-symbols-outlined" style="font-size:20px">article</span>Blog & Articles
+      </button>
+      <button onclick="showTab('textes')"  class="nav-btn text-white/80 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left hover:bg-white/10">
+        <span class="material-symbols-outlined" style="font-size:20px">edit_note</span>Textes & Contenus
+      </button>
+      <button onclick="showTab('photos')"  class="nav-btn text-white/80 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left hover:bg-white/10">
+        <span class="material-symbols-outlined" style="font-size:20px">photo_library</span>Photos & Médias
+      </button>
+      <button onclick="showTab('guide')"   class="nav-btn text-white/80 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left hover:bg-white/10">
+        <span class="material-symbols-outlined" style="font-size:20px">map</span>Guide de modification
+      </button>
+      <button onclick="showTab('carto')"   class="nav-btn text-white/80 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left hover:bg-white/10">
+        <span class="material-symbols-outlined" style="font-size:20px">travel_explore</span>Cartographie
+      </button>
+      <button onclick="showTab('publier')" class="nav-btn text-white/80 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left hover:bg-white/10">
+        <span class="material-symbols-outlined" style="font-size:20px">rocket_launch</span>Mettre en ligne
+      </button>
+    </nav>
+    <div class="p-4 border-t border-white/10 space-y-2">
+      <a href="index.html" target="_blank" class="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+        <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span>Voir le site
+      </a>
+      <button onclick="doLogout()" class="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+        <span class="material-symbols-outlined" style="font-size:16px">logout</span>Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- Bandeau connexion dossier -->
+    <div id="conn-banner" class="bg-amber-50 border-b border-amber-200 px-8 py-2.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-sm text-amber-800">
+        <span class="material-symbols-outlined text-amber-500" style="font-size:18px">folder_open</span>
+        <span id="conn-msg">Connectez le dossier <code class="bg-amber-100 px-1 rounded font-mono text-xs">site/</code> pour sauvegarder directement dans vos fichiers.</span>
+      </div>
+      <button type="button" id="conn-btn" onclick="connectFolder()"
+        class="bg-[#1b324a] hover:bg-[#2d5a7e] text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-colors flex items-center gap-1 shrink-0">
+        <span class="material-symbols-outlined" style="font-size:14px">link</span>Connecter le dossier
+      </button>
+    </div>
+
+    <!-- Top bar -->
+    <header class="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between sticky top-0 z-20">
+      <div>
+        <h1 id="page-title" class="font-['Manrope'] text-lg font-bold text-gray-800">Blog & Articles</h1>
+        <p id="page-sub" class="text-xs text-gray-400">Créer et gérer les articles du blog</p>
+      </div>
+      <span class="text-xs text-gray-300">Ramya Technologie · Admin</span>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-8">
+
+      <!-- ─── BLOG ─── -->
+      <div id="sec-blog">
+        <!-- Toolbar -->
+        <div class="flex items-center gap-3 mb-6">
+          <button onclick="showBlogList()" id="btn-list" class="bg-[#a23f00] text-white text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-1">
+            <span class="material-symbols-outlined" style="font-size:16px">list</span>Articles
+            <span id="article-count" class="bg-white/20 text-white text-xs px-1.5 py-0.5 rounded-full ml-1">0</span>
+          </button>
+          <button onclick="showBlogForm(null)" class="bg-white border border-gray-200 text-gray-700 hover:border-orange-400 hover:text-orange-600 text-sm font-medium px-4 py-2 rounded-xl flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px">add</span>Nouvel article
+          </button>
+          <button onclick="exportArticles()" title="Télécharger articles.json (si dossier non connecté)" class="bg-white border border-gray-200 hover:border-gray-400 text-gray-400 hover:text-gray-700 text-sm font-medium px-3 py-2 rounded-xl flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px">download</span><span class="hidden sm:inline">Export secours</span>
+          </button>
+        </div>
+
+        <!-- List -->
+        <div id="blog-list">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl px-5 py-3 text-sm text-blue-700 mb-4 max-w-4xl flex items-start gap-3">
+            <span class="material-symbols-outlined shrink-0 mt-0.5" style="font-size:18px">info</span>
+            <span>Si le dossier est <strong>connecté</strong> : toute modification est sauvegardée automatiquement dans <code class="bg-blue-100 px-1 rounded font-mono text-xs">data/articles.json</code>. Ensuite re-déployez sur Netlify. Sans connexion : utilisez <em>Export secours</em> pour télécharger le fichier.</span>
+          </div>
+          <div id="articles-grid" class="grid gap-4 max-w-4xl"></div>
+          <div id="no-articles" class="text-center py-20">
+            <span class="material-symbols-outlined text-gray-200" style="font-size:80px">article</span>
+            <p class="text-gray-400 mt-3 text-sm">Aucun article pour l'instant</p>
+            <button onclick="showBlogForm(null)" class="mt-4 bg-[#a23f00] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#f2650b] transition-colors">
+              Créer le premier article
+            </button>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div id="blog-form" class="hidden max-w-3xl">
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+            <h2 id="form-title" class="font-['Manrope'] text-xl font-bold text-gray-800 mb-6">Nouvel article</h2>
+            <input type="hidden" id="art-id">
+            <div class="space-y-5">
+              <div>
+                <label class="label">Titre *</label>
+                <input id="art-titre" type="text" class="field" placeholder="Titre de l'article">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="label">Catégorie</label>
+                  <select id="art-cat" class="field">
+                    <option>Vidéosurveillance</option>
+                    <option>Contrôle d'Accès</option>
+                    <option>Sécurité Incendie</option>
+                    <option>Géolocalisation</option>
+                    <option>Réseau & IT</option>
+                    <option>Actualités</option>
+                    <option>Conseils</option>
+                    <option>Tutoriels</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="label">Date</label>
+                  <input id="art-date" type="date" class="field">
+                </div>
+                <div>
+                  <label class="label">Auteur</label>
+                  <input id="art-auteur" type="text" class="field" value="Équipe Ramya">
+                </div>
+                <div>
+                  <label class="label">Temps de lecture</label>
+                  <input id="art-lecture" type="text" class="field" value="5 min de lecture">
+                </div>
+              </div>
+              <div>
+                <label class="label">URL de l'image de couverture</label>
+                <input id="art-img" type="url" class="field" placeholder="https://...">
+                <p class="text-xs text-gray-400 mt-1">
+                  Hébergez gratuitement sur
+                  <a href="https://imgbb.com" target="_blank" class="text-orange-500 hover:underline">ImgBB.com</a> ou
+                  <a href="https://cloudinary.com" target="_blank" class="text-orange-500 hover:underline">Cloudinary.com</a>
+                </p>
+              </div>
+              <div>
+                <label class="label">Résumé / Accroche (affiché dans la liste)</label>
+                <textarea id="art-resume" rows="2" class="field resize-none" placeholder="Un court résumé accrocheur..."></textarea>
+              </div>
+              <div>
+                <label class="label">Contenu complet de l'article</label>
+                <textarea id="art-contenu" rows="12" class="field resize-none font-mono text-xs leading-relaxed" placeholder="Rédigez votre article ici. Séparez les paragraphes par une ligne vide."></textarea>
+                <p class="text-xs text-gray-400 mt-1">Astuce : une ligne vide = nouveau paragraphe. Utilisez ** texte ** pour le gras.</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mt-6">
+              <button onclick="saveArticle()" class="bg-[#a23f00] hover:bg-[#f2650b] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:16px">save</span>Enregistrer
+              </button>
+              <button onclick="generateBlogHTML()" class="bg-[#1b324a] hover:bg-[#2d5a7e] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:16px">code</span>Générer le code HTML
+              </button>
+              <button onclick="showBlogList()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-xl transition-colors">
+                Annuler
+              </button>
+            </div>
+          </div>
+
+          <!-- HTML output -->
+          <div id="html-output" class="hidden mt-5">
+            <div class="bg-[#0f172a] rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-4">
+                <p class="text-white text-sm font-semibold flex items-center gap-2">
+                  <span class="material-symbols-outlined text-green-400" style="font-size:18px">check_circle</span>
+                  Code généré — coller dans <code class="text-green-400">blog.html</code>
+                </p>
+                <button onclick="copyHTML('html-code')" class="bg-[#a23f00] hover:bg-[#f2650b] text-white text-xs px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                  <span class="material-symbols-outlined" style="font-size:14px">content_copy</span>Copier
+                </button>
+              </div>
+              <pre id="html-code" class="text-green-300 text-xs overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed"></pre>
+            </div>
+            <div class="mt-3 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+              <strong>Comment l'ajouter ?</strong><br>
+              1. Ouvrez <code class="bg-amber-100 px-1 rounded">blog.html</code> dans un éditeur (Notepad++, VS Code)<br>
+              2. Cherchez <code class="bg-amber-100 px-1 rounded">Ctrl+F</code> → <code class="bg-amber-100 px-1 rounded">&lt;!-- ARTICLES --&gt;</code><br>
+              3. Collez le code juste après cette ligne
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── TEXTES ─── -->
+      <div id="sec-textes" class="hidden max-w-3xl space-y-6">
+
+        <div class="card p-6">
+          <h3 class="card-title"><span class="material-symbols-outlined icon-fill text-orange-500" style="font-size:20px">home</span>Slogan & texte d'accueil</h3>
+          <div class="space-y-4 mt-4">
+            <div>
+              <label class="label">Slogan principal (h1)</label>
+              <input id="t-slogan" type="text" class="field" value="Solutions électroniques pour aujourd'hui et demain">
+            </div>
+            <div>
+              <label class="label">Phrase secondaire (sous-titre)</label>
+              <textarea id="t-subtitle" rows="3" class="field resize-none">Spécialisée dans la sécurité électronique et la domotique depuis 2017. Nous concevons des solutions de vidéosurveillance, contrôle d'accès et géolocalisation pour les particuliers et entreprises en Côte d'Ivoire.</textarea>
+            </div>
+            <div>
+              <label class="label">Slogan signature</label>
+              <input id="t-signature" type="text" class="field" value="Protégé… partout où vous êtes">
+            </div>
+            <button onclick="genTextCode('home')" class="btn-secondary">
+              <span class="material-symbols-outlined" style="font-size:14px">code</span>Voir le code à remplacer
+            </button>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="card-title"><span class="material-symbols-outlined icon-fill text-orange-500" style="font-size:20px">call</span>Informations de contact</h3>
+          <div class="space-y-4 mt-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="label">Téléphone 1</label>
+                <input id="t-tel1" type="text" class="field" value="+225 27 22 20 44 98">
+              </div>
+              <div>
+                <label class="label">Téléphone 2</label>
+                <input id="t-tel2" type="text" class="field" value="+225 07 09 50 02 43">
+              </div>
+              <div>
+                <label class="label">Téléphone 3</label>
+                <input id="t-tel3" type="text" class="field" value="+225 05 66 75 06 69">
+              </div>
+              <div>
+                <label class="label">WhatsApp (numéro seul)</label>
+                <input id="t-wa" type="text" class="field" value="2250950243">
+              </div>
+            </div>
+            <div>
+              <label class="label">Email</label>
+              <input id="t-email" type="email" class="field" value="infos@ramyatechnologie.com">
+            </div>
+            <div>
+              <label class="label">Adresse</label>
+              <input id="t-adresse" type="text" class="field" value="813 Route d'Abatta, Cocody, Abidjan, Côte d'Ivoire">
+            </div>
+            <button onclick="genTextCode('contact')" class="btn-secondary">
+              <span class="material-symbols-outlined" style="font-size:14px">code</span>Voir le code à remplacer
+            </button>
+          </div>
+        </div>
+
+        <!-- Code output -->
+        <div id="text-output" class="hidden">
+          <div class="bg-[#0f172a] rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-4">
+              <p class="text-white text-sm font-semibold">Code à remplacer dans vos fichiers</p>
+              <button onclick="copyHTML('text-code')" class="bg-[#a23f00] text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 hover:bg-[#f2650b] transition-colors">
+                <span class="material-symbols-outlined" style="font-size:14px">content_copy</span>Copier
+              </button>
+            </div>
+            <pre id="text-code" class="text-green-300 text-xs overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── PHOTOS ─── -->
+      <div id="sec-photos" class="hidden max-w-4xl">
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+
+          <div class="card p-6">
+            <h3 class="card-title"><span class="material-symbols-outlined icon-fill text-orange-500" style="font-size:20px">cloud_upload</span>Héberger une photo (recommandé)</h3>
+            <p class="text-sm text-gray-500 mt-2 mb-4">Uploadez votre photo sur l'un de ces services gratuits pour obtenir un lien URL permanent :</p>
+            <div class="space-y-3">
+              <a href="https://imgbb.com" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors group border border-gray-100">
+                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined icon-fill text-orange-600" style="font-size:20px">photo</span>
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-semibold text-gray-800">ImgBB.com</div>
+                  <div class="text-xs text-gray-400">Gratuit · Sans compte · Lien permanent</div>
+                </div>
+                <span class="material-symbols-outlined text-gray-300" style="font-size:16px">open_in_new</span>
+              </a>
+              <a href="https://cloudinary.com/console/c-a52a3d9977d5d2b1fb4e97b4609e6b/media_library/home" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors group border border-gray-100">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined icon-fill text-blue-600" style="font-size:20px">cloud</span>
+                </div>
+                <div class="flex-1">
+                  <div class="text-sm font-semibold text-gray-800">Cloudinary.com</div>
+                  <div class="text-xs text-gray-400">25 Go gratuit · Optimisation auto · Compte requis</div>
+                </div>
+                <span class="material-symbols-outlined text-gray-300" style="font-size:16px">open_in_new</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="card-title"><span class="material-symbols-outlined icon-fill text-orange-500" style="font-size:20px">folder_open</span>Photo locale (sans internet)</h3>
+            <p class="text-sm text-gray-500 mt-2 mb-4">Pour utiliser une image stockée sur votre ordinateur :</p>
+            <ol class="space-y-3">
+              <li class="flex gap-3 items-start text-sm">
+                <span class="step-num w-7 h-7 bg-[#1b324a] text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                <span class="text-gray-700 pt-0.5">Copiez votre image dans le dossier<br><code class="bg-gray-100 text-xs px-1.5 py-0.5 rounded font-mono">NEWSITERAMYA/site/images/</code></span>
+              </li>
+              <li class="flex gap-3 items-start text-sm">
+                <span class="step-num w-7 h-7 bg-[#1b324a] text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                <span class="text-gray-700 pt-0.5">Nommez-la simplement, sans espaces<br><code class="bg-gray-100 text-xs px-1.5 py-0.5 rounded font-mono">ex: projet-hotel.jpg</code></span>
+              </li>
+              <li class="flex gap-3 items-start text-sm">
+                <span class="step-num w-7 h-7 bg-[#1b324a] text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                <span class="text-gray-700 pt-0.5">Dans le HTML, référencez-la par<br><code class="bg-gray-100 text-xs px-1.5 py-0.5 rounded font-mono">src="images/projet-hotel.jpg"</code></span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Preview tool -->
+        <div class="card p-6">
+          <h3 class="card-title"><span class="material-symbols-outlined icon-fill text-orange-500" style="font-size:20px">preview</span>Prévisualiser une image par URL</h3>
+          <div class="flex gap-4 items-end mt-4">
+            <div class="flex-1">
+              <label class="label">URL de l'image</label>
+              <input id="prev-url" type="url" class="field" placeholder="https://... (collez ici le lien de votre image)">
+              <button onclick="previewImg()" class="mt-3 btn-primary">Prévisualiser</button>
+            </div>
+            <div class="w-44 h-36 bg-gray-100 rounded-xl overflow-hidden border border-gray-200 shrink-0 flex items-center justify-center">
+              <img id="prev-img" src="" class="w-full h-full object-cover hidden">
+              <span id="prev-icon" class="material-symbols-outlined text-gray-300" style="font-size:40px">image</span>
+            </div>
+          </div>
+          <div id="prev-snippet" class="hidden mt-4 bg-[#0f172a] rounded-xl p-4">
+            <p class="text-white text-xs mb-2">Code HTML à copier :</p>
+            <pre id="prev-code" class="text-green-300 text-xs font-mono"></pre>
+            <button onclick="copyHTML('prev-code')" class="mt-2 bg-[#a23f00] text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 hover:bg-[#f2650b] transition-colors">
+              <span class="material-symbols-outlined" style="font-size:14px">content_copy</span>Copier
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── GUIDE ─── -->
+      <div id="sec-guide" class="hidden max-w-4xl">
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800 mb-6">
+          <strong>💡 Comment modifier ce site ?</strong> Ouvrez le fichier HTML concerné dans un éditeur de texte (Notepad++, VS Code, etc.), puis utilisez <kbd class="bg-blue-100 border border-blue-300 px-1.5 py-0.5 rounded text-xs">Ctrl + F</kbd> pour rechercher le texte à modifier.
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-5">
+          <div class="px-6 py-4" style="background:#1b324a">
+            <h3 class="font-['Manrope'] font-bold text-white flex items-center gap-2">
+              <span class="material-symbols-outlined" style="font-size:18px">map</span>
+              Carte du site — Quel fichier contient quoi
+            </h3>
+          </div>
+          <div class="divide-y divide-gray-100">
+            <div class="px-6 py-4 flex items-start gap-4 hover:bg-gray-50">
+              <code class="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded font-mono shrink-0 mt-0.5">index.html</code>
+              <div>
+                <div class="text-sm font-semibold text-gray-800">Page d'accueil</div>
+                <div class="text-xs text-gray-500">Slogan principal, stats, services présentés, CTA, bandeau partenaires</div>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4 hover:bg-gray-50">
+              <code class="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded font-mono shrink-0 mt-0.5">solutions.html</code>
+              <div>
+                <div class="text-sm font-semibold text-gray-800">Page Solutions</div>
+                <div class="text-xs text-gray-500">Les 17 produits/services avec images et descriptions</div>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4 hover:bg-gray-50">
+              <code class="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded font-mono shrink-0 mt-0.5">a-propos.html</code>
+              <div>
+                <div class="text-sm font-semibold text-gray-800">Page À Propos</div>
+                <div class="text-xs text-gray-500">Histoire de l'entreprise, valeurs, timeline, équipe</div>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4 hover:bg-gray-50">
+              <code class="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded font-mono shrink-0 mt-0.5">projets.html</code>
+              <div>
+                <div class="text-sm font-semibold text-gray-800">Page Projets & Réalisations</div>
+                <div class="text-xs text-gray-500">Études de cas, photos de chantiers, catégories filtrables</div>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4 hover:bg-gray-50">
+              <code class="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded font-mono shrink-0 mt-0.5">blog.html</code>
+              <div>
+                <div class="text-sm font-semibold text-gray-800">Page Blog & Actualités</div>
+                <div class="text-xs text-gray-500">Articles, actualités, conseils sécurité</div>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4 hover:bg-gray-50">
+              <code class="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded font-mono shrink-0 mt-0.5">contact.html</code>
+              <div>
+                <div class="text-sm font-semibold text-gray-800">Page Contact</div>
+                <div class="text-xs text-gray-500">Formulaire, adresse, téléphones, lien WhatsApp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="card p-5">
+            <h4 class="font-['Manrope'] font-bold text-gray-700 mb-3 text-sm">Modifier un texte</h4>
+            <ol class="space-y-2 text-xs text-gray-600">
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">1.</span>Ouvrez le fichier HTML dans Notepad++ ou VS Code</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">2.</span>Appuyez sur <kbd class="bg-gray-100 border border-gray-300 px-1 rounded">Ctrl+F</kbd> et cherchez le texte</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">3.</span>Modifiez directement dans le fichier</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">4.</span>Sauvegardez avec <kbd class="bg-gray-100 border border-gray-300 px-1 rounded">Ctrl+S</kbd></li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">5.</span>Rechargez la page dans le navigateur</li>
+            </ol>
+          </div>
+          <div class="card p-5">
+            <h4 class="font-['Manrope'] font-bold text-gray-700 mb-3 text-sm">Ajouter un projet réalisé</h4>
+            <ol class="space-y-2 text-xs text-gray-600">
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">1.</span>Ouvrez <code class="bg-gray-100 px-1 rounded">projets.html</code></li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">2.</span>Cherchez <code class="bg-gray-100 px-1 rounded">&lt;!-- PROJET --&gt;</code></li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">3.</span>Dupliquez un bloc de carte existant</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">4.</span>Changez le titre, la description et l'image</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">5.</span>Sauvegardez et vérifiez dans le navigateur</li>
+            </ol>
+          </div>
+          <div class="card p-5">
+            <h4 class="font-['Manrope'] font-bold text-gray-700 mb-3 text-sm">Changer le numéro de téléphone</h4>
+            <ol class="space-y-2 text-xs text-gray-600">
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">1.</span>Le numéro est répété dans les 6 fichiers HTML</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">2.</span>Dans chaque fichier, Ctrl+F → cherchez l'ancien numéro</li>
+              <li class="flex gap-2"><span class="text-orange-500 font-bold">3.</span>Remplacez-le par le nouveau (<kbd class="bg-gray-100 border border-gray-300 px-1 rounded">Ctrl+H</kbd> pour "Remplacer tout")</li>
+            </ol>
+          </div>
+          <div class="card p-5">
+            <h4 class="font-['Manrope'] font-bold text-gray-700 mb-3 text-sm">Éditeurs recommandés (gratuits)</h4>
+            <div class="space-y-2">
+              <a href="https://notepad-plus-plus.org/downloads/" target="_blank" class="flex items-center gap-2 text-xs text-gray-600 hover:text-orange-600">
+                <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span>Notepad++ (Windows, simple)
+              </a>
+              <a href="https://code.visualstudio.com/" target="_blank" class="flex items-center gap-2 text-xs text-gray-600 hover:text-orange-600">
+                <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span>VS Code (Windows/Mac, professionnel)
+              </a>
+              <a href="https://www.sublimetext.com/" target="_blank" class="flex items-center gap-2 text-xs text-gray-600 hover:text-orange-600">
+                <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span>Sublime Text (Mac/Windows)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── CARTOGRAPHIE ─── -->
+      <div id="sec-carto" class="hidden">
+
+        <!-- Stats rapides -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
+            <div id="c-total" class="font-['Manrope'] text-2xl font-black text-[#a23f00]">0</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wide">Installations</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
+            <div id="c-pays" class="font-['Manrope'] text-2xl font-black text-[#1b324a]">0</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wide">Pays</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
+            <div id="c-villes" class="font-['Manrope'] text-2xl font-black text-[#1b324a]">0</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wide">Villes</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
+            <div id="c-continents" class="font-['Manrope'] text-2xl font-black text-[#1b324a]">0</div>
+            <div class="text-xs text-gray-400 uppercase tracking-wide">Continents</div>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="flex flex-wrap items-center gap-3 mb-5">
+          <button onclick="showCartoList()" class="bg-[#a23f00] text-white text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-1">
+            <span class="material-symbols-outlined" style="font-size:16px">list</span>Toutes les installations
+          </button>
+          <button onclick="showCartoForm(null)" class="bg-white border border-gray-200 hover:border-orange-400 hover:text-orange-600 text-gray-700 text-sm font-medium px-4 py-2 rounded-xl flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px">add_location_alt</span>Nouvelle installation
+          </button>
+          <button onclick="exportInstallations()" title="Télécharger installations.json (si dossier non connecté)" class="bg-white border border-gray-200 hover:border-gray-400 text-gray-400 hover:text-gray-700 text-sm font-medium px-3 py-2 rounded-xl flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px">download</span><span class="hidden sm:inline">Export secours</span>
+          </button>
+          <a href="carte.html" target="_blank" class="bg-[#1b324a] hover:bg-[#2d5a7e] text-white text-sm font-medium px-4 py-2 rounded-xl flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span>Voir la carte publique
+          </a>
+        </div>
+
+        <!-- Liste -->
+        <div id="carto-list">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl px-5 py-3 text-sm text-blue-700 mb-4 max-w-5xl flex items-start gap-3">
+            <span class="material-symbols-outlined shrink-0 mt-0.5" style="font-size:18px">info</span>
+            <span>Si le dossier est <strong>connecté</strong> : toute modification est sauvegardée automatiquement dans <code class="bg-blue-100 px-1 rounded font-mono text-xs">data/installations.json</code>. Ensuite re-déployez sur Netlify. Sans connexion : utilisez <em>Export secours</em>.</span>
+          </div>
+          <div id="inst-grid" class="grid gap-3 max-w-5xl"></div>
+          <div id="inst-empty" class="text-center py-16">
+            <span class="material-symbols-outlined text-gray-200" style="font-size:72px">travel_explore</span>
+            <p class="text-gray-400 mt-3 text-sm">Aucune installation enregistrée</p>
+            <button onclick="showCartoForm(null)" class="mt-4 bg-[#a23f00] text-white text-sm font-semibold px-5 py-2.5 rounded-xl">Ajouter la première installation</button>
+          </div>
+        </div>
+
+        <!-- Formulaire -->
+        <div id="carto-form" class="hidden max-w-4xl">
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+            <h2 id="carto-form-title" class="font-['Manrope'] text-xl font-bold text-gray-800 mb-6">Nouvelle installation</h2>
+            <input type="hidden" id="inst-id">
+            <div class="grid grid-cols-2 gap-5 mb-5">
+              <div class="col-span-2">
+                <label class="label">Nom du projet / client *</label>
+                <input id="inst-nom" type="text" class="field" placeholder="Ex: Hôtel Ivoire Sofitel">
+              </div>
+              <div>
+                <label class="label">Type d'installation *</label>
+                <select id="inst-type" class="field" title="Type d'installation">
+                  <option>Vidéosurveillance</option>
+                  <option>Contrôle d'Accès</option>
+                  <option>Alarme Anti-Intrusion</option>
+                  <option>Sécurité Incendie</option>
+                  <option>Clôture Électrique</option>
+                  <option>Réseau Informatique</option>
+                  <option>GPS / Tracking</option>
+                  <option>Portails Automatisés</option>
+                  <option>Autre</option>
+                </select>
+              </div>
+              <div>
+                <label class="label">Date (mois/année)</label>
+                <input id="inst-date" type="text" class="field" placeholder="AAAA-MM (ex: 2024-06)" title="Date de l'installation au format AAAA-MM">
+              </div>
+              <div>
+                <label class="label">Quartier / Zone</label>
+                <input id="inst-quartier" type="text" class="field" placeholder="Ex: Cocody, Plateau…">
+              </div>
+              <div>
+                <label class="label">Ville *</label>
+                <input id="inst-ville" type="text" class="field" placeholder="Ex: Abidjan">
+              </div>
+              <div>
+                <label class="label">Pays *</label>
+                <input id="inst-pays" type="text" class="field" placeholder="Ex: Côte d'Ivoire" oninput="autoContinent()">
+              </div>
+              <div>
+                <label class="label">Continent</label>
+                <select id="inst-continent" class="field" title="Continent">
+                  <option>Afrique</option>
+                  <option>Europe</option>
+                  <option>Amérique</option>
+                  <option>Asie</option>
+                  <option>Océanie</option>
+                </select>
+              </div>
+              <div>
+                <label class="label">Équipements installés</label>
+                <input id="inst-equip" type="text" class="field" placeholder="Ex: 48 caméras IP, 32 lecteurs…">
+              </div>
+              <div class="col-span-2">
+                <label class="label">Description courte</label>
+                <textarea id="inst-desc" rows="2" class="field resize-none" placeholder="Brève description du projet réalisé…"></textarea>
+              </div>
+            </div>
+
+            <!-- Mini carte pour positionner l'installation -->
+            <div class="mb-5">
+              <label class="label">Position sur la carte</label>
+              <p class="text-xs text-gray-400 mb-2">👆 Cliquez sur la carte pour placer le marqueur de l'installation</p>
+              <div class="rounded-xl overflow-hidden border-2 border-dashed border-orange-200 hover:border-orange-400 transition-colors" style="height:300px">
+                <div id="admin-map" style="height:100%;width:100%"></div>
+              </div>
+              <div class="flex gap-4 mt-2">
+                <div class="flex items-center gap-2">
+                  <label class="text-xs font-medium text-gray-600">Lat :</label>
+                  <input id="inst-lat" type="number" step="0.000001" class="field w-32 text-xs" placeholder="5.3419">
+                </div>
+                <div class="flex items-center gap-2">
+                  <label class="text-xs font-medium text-gray-600">Lng :</label>
+                  <input id="inst-lng" type="number" step="0.000001" class="field w-32 text-xs" placeholder="-3.9958">
+                </div>
+                <button onclick="updateMarkerFromInput()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg transition-colors">
+                  Mettre à jour
+                </button>
+              </div>
+              <p class="text-xs text-gray-400 mt-1">💡 Vous pouvez aussi chercher les coordonnées sur <a href="https://www.latlong.net" target="_blank" rel="noopener" class="text-orange-500 hover:underline">latlong.net</a></p>
+            </div>
+
+            <div class="flex gap-3">
+              <button onclick="saveInstallation()" class="btn-primary">
+                <span class="material-symbols-outlined" style="font-size:16px">save</span>Enregistrer
+              </button>
+              <button onclick="showCartoList()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-xl transition-colors">
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── METTRE EN LIGNE ─── -->
+      <div id="sec-publier" class="hidden max-w-3xl">
+
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+          <div class="card p-5 border-2 border-orange-200 bg-orange-50">
+            <div class="text-orange-600 font-['Manrope'] font-bold text-sm mb-1">⭐ Netlify</div>
+            <div class="text-xs text-gray-600">Gratuit · 0 config · HTTPS auto · Nom personnalisable</div>
+            <div class="text-xs text-green-600 font-semibold mt-2">→ Recommandé</div>
+          </div>
+          <div class="card p-5">
+            <div class="font-['Manrope'] font-bold text-sm text-gray-700 mb-1">GitHub Pages</div>
+            <div class="text-xs text-gray-500">Gratuit · Nécessite un compte GitHub</div>
+          </div>
+          <div class="card p-5">
+            <div class="font-['Manrope'] font-bold text-sm text-gray-700 mb-1">Vercel</div>
+            <div class="text-xs text-gray-500">Gratuit · Très rapide · Compte requis</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div class="px-6 py-4" style="background:#1b324a">
+            <h3 class="font-['Manrope'] font-bold text-white flex items-center gap-2">
+              <span class="material-symbols-outlined" style="font-size:18px">rocket_launch</span>
+              Mettre en ligne avec Netlify (méthode gratuite la plus simple)
+            </h3>
+          </div>
+          <div class="p-6 space-y-5">
+
+            <div class="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <div class="w-9 h-9 bg-[#1b324a] text-white rounded-full flex items-center justify-center font-['Manrope'] font-bold text-sm shrink-0">1</div>
+              <div>
+                <div class="font-semibold text-gray-800 text-sm mb-1">Créez un compte gratuit sur Netlify</div>
+                <a href="https://app.netlify.com/signup" target="_blank" class="inline-flex items-center gap-1 text-orange-600 text-sm hover:underline font-medium">
+                  <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span>app.netlify.com/signup
+                </a>
+                <p class="text-xs text-gray-500 mt-1">Utilisez votre email ou connectez-vous avec Google/GitHub</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <div class="w-9 h-9 bg-[#1b324a] text-white rounded-full flex items-center justify-center font-['Manrope'] font-bold text-sm shrink-0">2</div>
+              <div>
+                <div class="font-semibold text-gray-800 text-sm mb-1">Accédez à "Sites" puis cliquez sur "Add new site"</div>
+                <p class="text-xs text-gray-500">Choisissez <strong>"Deploy manually"</strong> (déploiement manuel)</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 p-4 bg-orange-50 rounded-xl border border-orange-200">
+              <div class="w-9 h-9 bg-[#a23f00] text-white rounded-full flex items-center justify-center font-['Manrope'] font-bold text-sm shrink-0">3</div>
+              <div>
+                <div class="font-semibold text-[#a23f00] text-sm mb-1">⭐ Glissez-déposez le dossier <code class="bg-orange-100 px-1 rounded">site/</code></div>
+                <p class="text-xs text-gray-700">Dans votre explorateur de fichiers, localisez le dossier<br>
+                <code class="bg-orange-100 px-1.5 py-0.5 rounded font-mono text-xs">NEWSITERAMYA/site/</code><br>
+                et faites-le glisser dans la zone de Netlify.<br>
+                <strong>Votre site est en ligne en 30 secondes !</strong></p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <div class="w-9 h-9 bg-[#1b324a] text-white rounded-full flex items-center justify-center font-['Manrope'] font-bold text-sm shrink-0">4</div>
+              <div>
+                <div class="font-semibold text-gray-800 text-sm mb-1">Personnalisez l'adresse du site</div>
+                <p class="text-xs text-gray-500">Netlify vous donne une URL comme <code class="bg-gray-100 px-1 rounded">random-name-123.netlify.app</code><br>
+                Allez dans Site Settings → General → Change site name pour mettre<br>
+                <code class="bg-gray-100 px-1 rounded">ramya-technologie.netlify.app</code></p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <div class="w-9 h-9 bg-[#1b324a] text-white rounded-full flex items-center justify-center font-['Manrope'] font-bold text-sm shrink-0">5</div>
+              <div>
+                <div class="font-semibold text-gray-800 text-sm mb-1">Mettre à jour le site après modification</div>
+                <p class="text-xs text-gray-500">Chaque fois que vous modifiez des fichiers HTML, retournez sur Netlify et re-glissez le dossier <code class="bg-gray-100 px-1 rounded">site/</code>. Netlify remplace automatiquement l'ancienne version.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 p-4 bg-green-50 rounded-xl border border-green-200">
+              <div class="w-9 h-9 bg-green-600 text-white rounded-full flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined icon-fill text-white" style="font-size:18px">domain</span>
+              </div>
+              <div>
+                <div class="font-semibold text-green-800 text-sm mb-1">Nom de domaine personnalisé (optionnel)</div>
+                <p class="text-xs text-gray-600">Si vous achetez un domaine comme <strong>ramyatechnologie.ci</strong> ou <strong>.com</strong>, vous pouvez le connecter gratuitement à Netlify. Achetez votre domaine sur :</p>
+                <div class="flex gap-3 mt-2">
+                  <a href="https://www.gandi.net" target="_blank" class="text-xs text-blue-600 hover:underline">Gandi.net</a>
+                  <a href="https://www.namecheap.com" target="_blank" class="text-xs text-blue-600 hover:underline">Namecheap.com</a>
+                  <a href="https://www.godaddy.com" target="_blank" class="text-xs text-blue-600 hover:underline">GoDaddy.com</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="mt-5 bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800">
+          <strong>HTTPS inclus automatiquement.</strong> Netlify active un certificat SSL gratuit (cadenas vert 🔒) dès que votre site est en ligne. Votre site sera sécurisé, professionnel et référencé par Google.
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══════ STYLES partagés ═══════ -->
+<style>
+  .label{display:block;font-size:.75rem;font-weight:600;color:#374151;margin-bottom:.25rem}
+  .field{width:100%;border:1px solid #e5e7eb;border-radius:.75rem;padding:.625rem 1rem;font-size:.875rem;outline:none;transition:.15s}
+  .field:focus{border-color:#f97316;box-shadow:0 0 0 3px rgba(249,115,22,.15)}
+  .card{background:#fff;border-radius:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .card-title{display:flex;align-items:center;gap:.5rem;font-family:'Manrope',sans-serif;font-weight:700;color:#1f2937;font-size:.9375rem}
+  .btn-primary{display:inline-flex;align-items:center;gap:.375rem;background:#a23f00;color:#fff;font-size:.8125rem;font-weight:600;padding:.5rem 1.25rem;border-radius:.75rem;cursor:pointer;transition:.15s}
+  .btn-primary:hover{background:#f2650b}
+  .btn-secondary{display:inline-flex;align-items:center;gap:.375rem;background:#1b324a;color:#fff;font-size:.8125rem;font-weight:600;padding:.5rem 1.25rem;border-radius:.75rem;cursor:pointer;transition:.15s}
+  .btn-secondary:hover{background:#2d5a7e}
+</style>
+
+<script>
+const PASS  = 'Ramya2025';
+const STORE = 'ramya_admin_articles';
+
+// ══════════════════════════════════════════════════
+//  FILE SYSTEM ACCESS API — sauvegarde directe
+// ══════════════════════════════════════════════════
+let siteDir = null; // FileSystemDirectoryHandle
+
+// IndexedDB : persister le handle entre sessions
+function openHandleDB() {
+  return new Promise((res, rej) => {
+    const req = indexedDB.open('ramya_fs', 1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('h');
+    req.onsuccess = e => res(e.target.result);
+    req.onerror   = rej;
+  });
+}
+async function loadSavedHandle() {
+  try {
+    const db = await openHandleDB();
+    return new Promise(res => {
+      const tx  = db.transaction('h','readonly');
+      const req = tx.objectStore('h').get('dir');
+      req.onsuccess = e => res(e.target.result || null);
+      req.onerror   = () => res(null);
+    });
+  } catch(e){ return null; }
+}
+async function persistHandle(h) {
+  try {
+    const db = await openHandleDB();
+    const tx = db.transaction('h','readwrite');
+    tx.objectStore('h').put(h,'dir');
+  } catch(e){}
+}
+
+// Demander / vérifier la permission sur le handle
+async function verifyPermission(handle) {
+  if (!handle) return false;
+  const perm = { mode:'readwrite' };
+  if ((await handle.queryPermission(perm)) === 'granted') return true;
+  if ((await handle.requestPermission(perm)) === 'granted') return true;
+  return false;
+}
+
+// Bouton "Connecter le dossier"
+async function connectFolder() {
+  if (!window.showDirectoryPicker) {
+    alert('Votre navigateur ne supporte pas cette fonctionnalité.\nUtilisez Chrome ou Edge pour la sauvegarde directe.');
+    return;
+  }
+  try {
+    const dir = await window.showDirectoryPicker({ mode:'readwrite', startIn:'documents' });
+    siteDir = dir;
+    await persistHandle(dir);
+    setConnected(dir.name);
+    showNotif('Dossier "' + dir.name + '" connecté ✓ — Sauvegarde automatique activée');
+  } catch(e) { /* annulé */ }
+}
+
+// Mettre à jour le bandeau selon l'état de connexion
+function setConnected(name) {
+  const banner = document.getElementById('conn-banner');
+  const msg    = document.getElementById('conn-msg');
+  const btn    = document.getElementById('conn-btn');
+  banner.style.background = '#f0fdf4';
+  banner.style.borderColor = '#bbf7d0';
+  msg.style.color = '#166534';
+  msg.innerHTML = '<span style="font-size:18px;vertical-align:middle">✅</span> Dossier <strong>' + name + '</strong> connecté — les modifications sont sauvegardées directement dans vos fichiers.';
+  btn.textContent = 'Changer de dossier';
+  btn.style.background = '#15803d';
+}
+
+// Écrire un fichier JSON dans data/
+async function writeJSON(filename, data) {
+  if (!siteDir) return false;
+  const ok = await verifyPermission(siteDir);
+  if (!ok) { showNotif('⚠️ Permission refusée — cliquez "Connecter" pour réautoriser'); return false; }
+  try {
+    let dataDir;
+    try { dataDir = await siteDir.getDirectoryHandle('data'); }
+    catch(e) { dataDir = await siteDir.getDirectoryHandle('data',{create:true}); }
+    const fh  = await dataDir.getFileHandle(filename, {create:true});
+    const wr  = await fh.createWritable();
+    await wr.write(JSON.stringify(data, null, 2));
+    await wr.close();
+    return true;
+  } catch(e) { console.error(e); return false; }
+}
+
+// Restaurer le handle au chargement
+(async function restoreHandle() {
+  const h = await loadSavedHandle();
+  if (!h) return;
+  const ok = await verifyPermission(h);
+  if (ok) { siteDir = h; setConnected(h.name); }
+})();
+
+// ── Initialisation depuis les fichiers JSON du site ───
+async function initFromSiteData() {
+  const promises = [];
+
+  // Articles
+  if (!localStorage.getItem(STORE)) {
+    promises.push(
+      fetch('data/articles.json')
+        .then(r => r.ok ? r.json() : [])
+        .then(data => { if (data.length) { localStorage.setItem(STORE, JSON.stringify(data)); } })
+        .catch(() => {})
+    );
+  }
+
+  // Installations
+  if (!localStorage.getItem(INST_STORE)) {
+    promises.push(
+      fetch('data/installations.json')
+        .then(r => r.ok ? r.json() : [])
+        .then(data => { if (data.length) { localStorage.setItem(INST_STORE, JSON.stringify(data)); } })
+        .catch(() => {})
+    );
+  }
+
+  if (promises.length) {
+    await Promise.all(promises);
+    // Rafraîchir les compteurs si déjà connecté
+    const arts  = JSON.parse(localStorage.getItem(STORE)  || '[]');
+    const insts = JSON.parse(localStorage.getItem(INST_STORE) || '[]');
+    const cntEl = document.getElementById('article-count');
+    if (cntEl) cntEl.textContent = arts.length;
+    updateCartoStats(insts);
+  }
+}
+// Lancer dès que la page est prête
+initFromSiteData();
+
+// ── Auth ──────────────────────────────────────
+function doLogin(){
+  const v = document.getElementById('pwd-input').value;
+  if(v === PASS){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard').style.display='flex';
+    sessionStorage.setItem('ramya_admin','1');
+    showTab('blog');
+  } else {
+    document.getElementById('login-error').classList.remove('hidden');
+  }
+}
+function doLogout(){
+  sessionStorage.removeItem('ramya_admin');
+  location.reload();
+}
+if(sessionStorage.getItem('ramya_admin')){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('dashboard').style.display='flex';
+}
+
+// ── Tabs ──────────────────────────────────────
+const tabs = {
+  'blog':    {title:'Blog & Articles',           sub:'Créer et gérer les articles du blog'},
+  'textes':  {title:'Textes & Contenus',         sub:'Modifier les textes et informations du site'},
+  'photos':  {title:'Photos & Médias',           sub:'Gérer et héberger les images'},
+  'guide':   {title:'Guide de modification',     sub:'Comprendre la structure du site'},
+  'carto':   {title:'Cartographie des installations', sub:'Ajouter et gérer les installations sur la carte'},
+  'publier': {title:'Mettre en ligne',           sub:'Publier le site sur Internet gratuitement'},
+};
+function showTab(name){
+  Object.keys(tabs).forEach(k=>{
+    const s = document.getElementById('sec-'+k);
+    if(s) s.classList.add('hidden');
+  });
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const idx = Object.keys(tabs).indexOf(name);
+  if(navBtns[idx]) navBtns[idx].classList.add('active');
+  const sec = document.getElementById('sec-'+name);
+  if(sec) sec.classList.remove('hidden');
+  document.getElementById('page-title').textContent = tabs[name].title;
+  document.getElementById('page-sub').textContent   = tabs[name].sub;
+  if(name==='blog')  loadArticleList();
+  if(name==='carto') { loadCartoList(); initAdminMap(); }
+}
+
+// ── Blog ──────────────────────────────────────
+function getArticles(){ return JSON.parse(localStorage.getItem(STORE)||'[]'); }
+function setArticles(arr){ localStorage.setItem(STORE,JSON.stringify(arr)); }
+
+function showBlogList(){
+  document.getElementById('blog-list').classList.remove('hidden');
+  document.getElementById('blog-form').classList.add('hidden');
+  loadArticleList();
+}
+function showBlogForm(art){
+  document.getElementById('blog-list').classList.add('hidden');
+  document.getElementById('blog-form').classList.remove('hidden');
+  document.getElementById('html-output').classList.add('hidden');
+  if(art){
+    document.getElementById('form-title').textContent = 'Modifier l\'article';
+    document.getElementById('art-id').value    = art.id;
+    document.getElementById('art-titre').value = art.titre;
+    document.getElementById('art-cat').value   = art.cat;
+    document.getElementById('art-date').value  = art.date;
+    document.getElementById('art-auteur').value= art.auteur;
+    document.getElementById('art-lecture').value=art.lecture;
+    document.getElementById('art-img').value   = art.img||'';
+    document.getElementById('art-resume').value= art.resume;
+    document.getElementById('art-contenu').value=art.contenu;
+  } else {
+    document.getElementById('form-title').textContent='Nouvel article';
+    document.getElementById('art-id').value='';
+    ['titre','img','resume','contenu'].forEach(f=>document.getElementById('art-'+f).value='');
+    document.getElementById('art-auteur').value='Équipe Ramya';
+    document.getElementById('art-lecture').value='5 min de lecture';
+    document.getElementById('art-date').value = new Date().toISOString().split('T')[0];
+  }
+}
+function saveArticle(){
+  const titre = document.getElementById('art-titre').value.trim();
+  if(!titre){alert('Le titre est obligatoire.');return;}
+  const arts = getArticles();
+  const id = document.getElementById('art-id').value || Date.now().toString();
+  const art = {
+    id, titre,
+    cat:     document.getElementById('art-cat').value,
+    date:    document.getElementById('art-date').value,
+    auteur:  document.getElementById('art-auteur').value,
+    lecture: document.getElementById('art-lecture').value,
+    img:     document.getElementById('art-img').value,
+    resume:  document.getElementById('art-resume').value,
+    contenu: document.getElementById('art-contenu').value,
+  };
+  const idx = arts.findIndex(a=>a.id===id);
+  if(idx>=0) arts[idx]=art; else arts.unshift(art);
+  setArticles(arts);
+  document.getElementById('article-count').textContent = arts.length;
+  if(siteDir) {
+    writeJSON('articles.json', arts).then(ok => {
+      showNotif(ok ? 'Article sauvegardé ✓ (fichier mis à jour)' : 'Article sauvegardé en local');
+    });
+  } else {
+    showNotif('Article enregistré ✓');
+  }
+  loadArticleList();
+}
+function deleteArticle(id){
+  if(!confirm('Supprimer cet article ?')) return;
+  const arts = getArticles().filter(a=>a.id!==id);
+  setArticles(arts);
+  document.getElementById('article-count').textContent = arts.length;
+  if(siteDir) {
+    writeJSON('articles.json', arts).then(ok => {
+      showNotif(ok ? 'Article supprimé ✓ (fichier mis à jour)' : 'Article supprimé en local');
+    });
+  } else { showNotif('Article supprimé'); }
+  loadArticleList();
+}
+function editArticle(id){
+  const art = getArticles().find(a=>a.id===id);
+  if(art) showBlogForm(art);
+}
+function loadArticleList(){
+  const arts = getArticles();
+  const grid = document.getElementById('articles-grid');
+  const empty = document.getElementById('no-articles');
+  document.getElementById('article-count').textContent = arts.length;
+  if(!arts.length){
+    grid.innerHTML=''; empty.style.display=''; return;
+  }
+  empty.style.display='none';
+  grid.innerHTML = arts.map(a=>`
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex gap-4 items-start hover:shadow-md transition-shadow">
+      ${a.img?`<img src="${a.img}" class="w-20 h-16 rounded-lg object-cover shrink-0" onerror="this.style.display='none'">`:
+      `<div class="w-20 h-16 rounded-lg bg-gray-100 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-gray-300" style="font-size:24px">image</span></div>`}
+      <div class="flex-1 min-w-0">
+        <div class="flex items-start gap-2 mb-1">
+          <span class="bg-orange-50 text-orange-700 text-xs font-medium px-2 py-0.5 rounded-full shrink-0">${a.cat}</span>
+          <span class="text-xs text-gray-400">${a.date}</span>
+        </div>
+        <h4 class="font-['Manrope'] font-bold text-gray-800 text-sm truncate">${a.titre}</h4>
+        <p class="text-xs text-gray-500 mt-0.5 line-clamp-2">${a.resume||''}</p>
+      </div>
+      <div class="flex gap-1 shrink-0">
+        <button onclick="editArticle('${a.id}')" class="w-8 h-8 bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-lg flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined" style="font-size:16px">edit</span>
+        </button>
+        <button onclick="generateBlogHTMLById('${a.id}')" class="w-8 h-8 bg-gray-100 hover:bg-green-100 hover:text-green-700 rounded-lg flex items-center justify-center transition-colors" title="Générer HTML">
+          <span class="material-symbols-outlined" style="font-size:16px">code</span>
+        </button>
+        <button onclick="deleteArticle('${a.id}')" class="w-8 h-8 bg-gray-100 hover:bg-red-100 hover:text-red-600 rounded-lg flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined" style="font-size:16px">delete</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+function generateBlogHTML(){
+  const titre   = document.getElementById('art-titre').value.trim();
+  const cat     = document.getElementById('art-cat').value;
+  const date    = document.getElementById('art-date').value;
+  const auteur  = document.getElementById('art-auteur').value;
+  const lecture = document.getElementById('art-lecture').value;
+  const img     = document.getElementById('art-img').value;
+  const resume  = document.getElementById('art-resume').value;
+  if(!titre){alert('Remplissez au moins le titre.');return;}
+  const formattedDate = date ? new Date(date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}) : '';
+  const html = buildArticleCard({titre,cat,date:formattedDate,auteur,lecture,img,resume});
+  document.getElementById('html-code').textContent = html;
+  document.getElementById('html-output').classList.remove('hidden');
+  document.getElementById('html-output').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function generateBlogHTMLById(id){
+  const a = getArticles().find(x=>x.id===id);
+  if(!a) return;
+  showBlogForm(a);
+  setTimeout(()=>{
+    const formattedDate = a.date ? new Date(a.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}) : '';
+    const html = buildArticleCard({...a,date:formattedDate});
+    document.getElementById('html-code').textContent = html;
+    document.getElementById('html-output').classList.remove('hidden');
+    document.getElementById('html-output').scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+function buildArticleCard(a){
+  return `<!-- Article : ${a.titre} -->
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group hover:shadow-lg transition-shadow">
+  <div class="h-48 relative overflow-hidden bg-gray-100">
+    ${a.img?`<img src="${a.img}" alt="${a.titre}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`:
+    `<div class="w-full h-full bg-[#f0f4fa] flex items-center justify-center"><span class="material-symbols-outlined text-gray-300" style="font-size:48px">article</span></div>`}
+    <div class="absolute top-3 left-3">
+      <span class="bg-primary/90 text-white font-['Inter'] text-xs font-medium px-3 py-1 rounded-full">${a.cat}</span>
+    </div>
+  </div>
+  <div class="p-5">
+    <h3 class="font-['Manrope'] text-lg font-bold text-on-surface mb-2 leading-snug">${a.titre}</h3>
+    <p class="font-['Inter'] text-sm text-on-surface-variant leading-relaxed mb-4">${a.resume}</p>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-primary/10 rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary" style="font-size:14px">person</span>
+        </div>
+        <div>
+          <p class="font-['Inter'] text-xs font-medium text-on-surface">${a.auteur}</p>
+          <p class="font-['Inter'] text-xs text-on-surface-variant">${a.date}</p>
+        </div>
+      </div>
+      <span class="font-['Inter'] text-xs text-on-surface-variant flex items-center gap-1">
+        <span class="material-symbols-outlined" style="font-size:14px">schedule</span>${a.lecture}
+      </span>
+    </div>
+  </div>
+</div>`;
+}
+
+// ── Textes ──────────────────────────────────────
+function genTextCode(type){
+  let code='';
+  if(type==='home'){
+    const slogan  = document.getElementById('t-slogan').value;
+    const sub     = document.getElementById('t-subtitle').value;
+    const sign    = document.getElementById('t-signature').value;
+    code = `Dans index.html, remplacez le texte entre les balises <h1> et <p> :\n\n<h1 ...>\n  ${slogan}\n</h1>\n\n<p ...>\n  ${sub}\n</p>\n\n<p ...>"${sign}"</p>`;
+  } else {
+    const tel1 = document.getElementById('t-tel1').value;
+    const tel2 = document.getElementById('t-tel2').value;
+    const tel3 = document.getElementById('t-tel3').value;
+    const wa   = document.getElementById('t-wa').value;
+    const mail = document.getElementById('t-email').value;
+    const addr = document.getElementById('t-adresse').value;
+    code = `Dans TOUS les fichiers HTML (Ctrl+H = Remplacer tout) :\n\nAdresse :\n  ${addr}\n\nTéléphones :\n  ${tel1}\n  ${tel2}\n  ${tel3}\n\nEmail :\n  ${mail}\n\nLien WhatsApp (dans href) :\n  https://wa.me/${wa}`;
+  }
+  document.getElementById('text-code').textContent = code;
+  document.getElementById('text-output').classList.remove('hidden');
+  document.getElementById('text-output').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── Photos ──────────────────────────────────────
+function previewImg(){
+  const url = document.getElementById('prev-url').value.trim();
+  if(!url) return;
+  const img = document.getElementById('prev-img');
+  img.src = url;
+  img.classList.remove('hidden');
+  document.getElementById('prev-icon').classList.add('hidden');
+  document.getElementById('prev-code').textContent = `<img src="${url}" alt="Image Ramya" class="w-full h-full object-cover">`;
+  document.getElementById('prev-snippet').classList.remove('hidden');
+}
+
+// ── Utils ──────────────────────────────────────
+function copyHTML(id){
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>showNotif('Copié ✓')).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showNotif('Copié ✓');
+  });
+}
+function showNotif(msg){
+  const n=document.createElement('div');
+  n.textContent=msg;
+  n.style.cssText='position:fixed;top:20px;right:20px;background:#1b324a;color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeIn .2s ease';
+  document.body.appendChild(n);
+  setTimeout(()=>n.remove(),2200);
+}
+
+// ── Cartographie ──────────────────────────────────────
+const INST_STORE = 'ramya_installations';
+let adminMap = null, adminMarker = null, adminMapReady = false;
+
+const PAYS_CONTINENTS = {
+  "Côte d'Ivoire":'Afrique',"Ghana":'Afrique',"Sénégal":'Afrique',"Mali":'Afrique',
+  "Burkina Faso":'Afrique',"Nigeria":'Afrique',"Cameroun":'Afrique',"Gabon":'Afrique',
+  "Congo":'Afrique',"Togo":'Afrique',"Bénin":'Afrique',"Niger":'Afrique',
+  "Guinée":'Afrique',"Liberia":'Afrique',"Maroc":'Afrique',"Algérie":'Afrique',
+  "Tunisie":'Afrique',"Égypte":'Afrique',"Kenya":'Afrique',"Éthiopie":'Afrique',
+  "France":'Europe',"Belgique":'Europe',"Suisse":'Europe',"Espagne":'Europe',
+  "Portugal":'Europe',"Italie":'Europe',"Allemagne":'Europe',"Royaume-Uni":'Europe',
+  "Canada":'Amérique',"USA":'Amérique',"États-Unis":'Amérique',"Brésil":'Amérique',
+  "Chine":'Asie',"Inde":'Asie',"Japon":'Asie',"Corée du Sud":'Asie',
+};
+const TYPE_COLORS = {
+  'Vidéosurveillance':'#f2650b',"Contrôle d'Accès":'#1b324a',
+  'Alarme Anti-Intrusion':'#dc2626','Sécurité Incendie':'#f59e0b',
+  'Réseau Informatique':'#0d9488','Clôture Électrique':'#7c3aed',
+  'GPS / Tracking':'#10b981','Portails Automatisés':'#3b82f6','Autre':'#6b7280',
+};
+
+function getInstallations(){ return JSON.parse(localStorage.getItem(INST_STORE)||'[]'); }
+function setInstallations(arr){ localStorage.setItem(INST_STORE,JSON.stringify(arr)); }
+
+function autoContinent(){
+  const p = document.getElementById('inst-pays').value.trim();
+  const c = PAYS_CONTINENTS[p];
+  if(c) document.getElementById('inst-continent').value = c;
+}
+
+function initAdminMap(){
+  if(adminMapReady) return;
+  adminMapReady = true;
+  setTimeout(()=>{
+    adminMap = L.map('admin-map',{center:[7,-4],zoom:5});
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+      attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
+    }).addTo(adminMap);
+
+    // Afficher les installations existantes en gris
+    getInstallations().forEach(inst=>{
+      if(inst.lat && inst.lng){
+        L.circleMarker([inst.lat,inst.lng],{radius:6,fillColor:'#6b7280',fillOpacity:.7,color:'#fff',weight:1.5})
+         .addTo(adminMap).bindPopup(inst.nom);
+      }
+    });
+
+    adminMap.on('click',function(e){
+      const {lat,lng} = e.latlng;
+      document.getElementById('inst-lat').value = lat.toFixed(6);
+      document.getElementById('inst-lng').value = lng.toFixed(6);
+      if(adminMarker) adminMap.removeLayer(adminMarker);
+      adminMarker = L.circleMarker([lat,lng],{
+        radius:12,fillColor:'#f2650b',fillOpacity:.9,color:'#fff',weight:2.5
+      }).addTo(adminMap).bindPopup('📍 Nouvelle installation').openPopup();
+    });
+  },150);
+}
+
+function updateMarkerFromInput(){
+  const lat = parseFloat(document.getElementById('inst-lat').value);
+  const lng = parseFloat(document.getElementById('inst-lng').value);
+  if(isNaN(lat)||isNaN(lng)){alert('Coordonnées invalides.');return;}
+  if(adminMarker) adminMap.removeLayer(adminMarker);
+  adminMarker = L.circleMarker([lat,lng],{radius:12,fillColor:'#f2650b',fillOpacity:.9,color:'#fff',weight:2.5})
+    .addTo(adminMap).bindPopup('📍 Position sélectionnée').openPopup();
+  adminMap.flyTo([lat,lng],10,{duration:0.8});
+}
+
+function showCartoList(){
+  document.getElementById('carto-list').classList.remove('hidden');
+  document.getElementById('carto-form').classList.add('hidden');
+  loadCartoList();
+}
+
+function showCartoForm(inst){
+  document.getElementById('carto-list').classList.add('hidden');
+  document.getElementById('carto-form').classList.remove('hidden');
+  if(inst){
+    document.getElementById('carto-form-title').textContent = 'Modifier l\'installation';
+    document.getElementById('inst-id').value       = inst.id;
+    document.getElementById('inst-nom').value      = inst.nom||'';
+    document.getElementById('inst-type').value     = inst.type||'Vidéosurveillance';
+    document.getElementById('inst-date').value     = inst.date||'';
+    document.getElementById('inst-quartier').value = inst.quartier||'';
+    document.getElementById('inst-ville').value    = inst.ville||'';
+    document.getElementById('inst-pays').value     = inst.pays||'';
+    document.getElementById('inst-continent').value= inst.continent||'Afrique';
+    document.getElementById('inst-equip').value    = inst.equip||'';
+    document.getElementById('inst-desc').value     = inst.desc||'';
+    document.getElementById('inst-lat').value      = inst.lat||'';
+    document.getElementById('inst-lng').value      = inst.lng||'';
+    // Placer marqueur sur la mini-carte
+    if(inst.lat && inst.lng && adminMap){
+      if(adminMarker) adminMap.removeLayer(adminMarker);
+      adminMarker = L.circleMarker([inst.lat,inst.lng],{radius:12,fillColor:'#f2650b',fillOpacity:.9,color:'#fff',weight:2.5})
+        .addTo(adminMap).bindPopup(inst.nom).openPopup();
+      adminMap.flyTo([inst.lat,inst.lng],10,{duration:0.6});
+    }
+  } else {
+    document.getElementById('carto-form-title').textContent = 'Nouvelle installation';
+    ['inst-id','inst-nom','inst-date','inst-quartier','inst-ville','inst-pays','inst-equip','inst-desc','inst-lat','inst-lng']
+      .forEach(id=>{ document.getElementById(id).value=''; });
+    document.getElementById('inst-type').value = 'Vidéosurveillance';
+    document.getElementById('inst-continent').value = 'Afrique';
+    if(adminMarker && adminMap){ adminMap.removeLayer(adminMarker); adminMarker=null; }
+  }
+  // Refresh carte size après affichage
+  setTimeout(()=>{ if(adminMap) adminMap.invalidateSize(); },200);
+}
+
+function saveInstallation(){
+  const nom = document.getElementById('inst-nom').value.trim();
+  if(!nom){alert('Le nom du projet est obligatoire.');return;}
+  const ville = document.getElementById('inst-ville').value.trim();
+  if(!ville){alert('La ville est obligatoire.');return;}
+  const lat = parseFloat(document.getElementById('inst-lat').value);
+  const lng = parseFloat(document.getElementById('inst-lng').value);
+  if(isNaN(lat)||isNaN(lng)){alert('Cliquez sur la carte pour positionner l\'installation.');return;}
+
+  const insts = getInstallations();
+  const id = document.getElementById('inst-id').value || Date.now().toString();
+  const inst = {
+    id, nom,
+    type:      document.getElementById('inst-type').value,
+    date:      document.getElementById('inst-date').value,
+    quartier:  document.getElementById('inst-quartier').value,
+    ville,
+    pays:      document.getElementById('inst-pays').value,
+    continent: document.getElementById('inst-continent').value,
+    equip:     document.getElementById('inst-equip').value,
+    desc:      document.getElementById('inst-desc').value,
+    lat, lng,
+  };
+  const idx = insts.findIndex(i=>i.id===id);
+  if(idx>=0) insts[idx]=inst; else insts.unshift(inst);
+  setInstallations(insts);
+  updateCartoStats(insts);
+  if(siteDir) {
+    writeJSON('installations.json', insts).then(ok => {
+      showNotif(ok ? 'Installation sauvegardée ✓ (fichier mis à jour)' : 'Installation sauvegardée en local');
+    });
+  } else { showNotif('Installation enregistrée ✓'); }
+  showCartoList();
+}
+
+function deleteInstallation(id){
+  if(!confirm('Supprimer cette installation ?')) return;
+  const insts = getInstallations().filter(i=>i.id!==id);
+  setInstallations(insts);
+  updateCartoStats(insts);
+  if(siteDir) {
+    writeJSON('installations.json', insts).then(ok => {
+      showNotif(ok ? 'Installation supprimée ✓ (fichier mis à jour)' : 'Installation supprimée en local');
+    });
+  } else { showNotif('Installation supprimée'); }
+  loadCartoList();
+}
+
+function loadCartoList(){
+  const insts = getInstallations();
+  updateCartoStats(insts);
+  const grid = document.getElementById('inst-grid');
+  const empty = document.getElementById('inst-empty');
+  if(!insts.length){ grid.innerHTML=''; empty.style.display=''; return; }
+  empty.style.display='none';
+  const col = t => TYPE_COLORS[t]||'#6b7280';
+  grid.innerHTML = insts.map(i=>`
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex gap-4 items-center hover:shadow-md transition-shadow">
+      <div class="w-4 h-4 rounded-full shrink-0" style="background:${col(i.type)}"></div>
+      <div class="flex-1 min-w-0">
+        <div class="font-['Manrope'] font-bold text-gray-800 text-sm truncate">${i.nom}</div>
+        <div class="flex items-center gap-2 mt-0.5">
+          <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:${col(i.type)}20;color:${col(i.type)}">${i.type}</span>
+          <span class="text-xs text-gray-400">📍 ${i.quartier?i.quartier+', ':''}${i.ville}, ${i.pays}</span>
+          ${i.date?`<span class="text-xs text-gray-400">· ${i.date}</span>`:''}
+        </div>
+      </div>
+      <div class="flex gap-1 shrink-0">
+        <button type="button" onclick="showCartoForm(${JSON.stringify(i).replace(/"/g,'&quot;')})"
+          class="w-8 h-8 bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-lg flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined" style="font-size:16px">edit</span>
+        </button>
+        <button type="button" onclick="deleteInstallation('${i.id}')"
+          class="w-8 h-8 bg-gray-100 hover:bg-red-100 hover:text-red-600 rounded-lg flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined" style="font-size:16px">delete</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateCartoStats(insts){
+  document.getElementById('c-total').textContent     = insts.length;
+  document.getElementById('c-pays').textContent      = new Set(insts.map(i=>i.pays).filter(Boolean)).size;
+  document.getElementById('c-villes').textContent    = new Set(insts.map(i=>i.ville).filter(Boolean)).size;
+  document.getElementById('c-continents').textContent= new Set(insts.map(i=>i.continent).filter(Boolean)).size;
+}
+
+function exportArticles(){
+  const arts = getArticles();
+  if(!arts.length){alert('Aucun article à exporter.');return;}
+  const blob = new Blob([JSON.stringify(arts,null,2)],{type:'application/json'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='articles.json'; a.click();
+  showNotif('articles.json téléchargé ✓ — Copiez-le dans site/data/');
+}
+function exportInstallations(){
+  const insts = getInstallations();
+  if(!insts.length){alert('Aucune installation à exporter.');return;}
+  const blob = new Blob([JSON.stringify(insts,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'installations.json';
+  a.click();
+  showNotif('JSON téléchargé ✓ — Copiez-le dans site/data/');
+}
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>

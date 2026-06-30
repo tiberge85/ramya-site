@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carte des Installations - Ramya Technologie Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary":"#a23f00","primary-container":"#f2650b","on-primary":"#ffffff",
+          "secondary":"#545e76","on-secondary":"#ffffff","secondary-container":"#d7e2ff",
+          "background":"#f8f9ff","on-background":"#031d34","surface":"#f8f9ff","on-surface":"#031d34",
+          "surface-variant":"#d1e4ff","on-surface-variant":"#594137",
+          "surface-container-lowest":"#ffffff","surface-container-low":"#eef4ff","surface-container":"#e5efff",
+          "surface-container-high":"#dbe9ff","surface-container-highest":"#d1e4ff",
+          "inverse-surface":"#1b324a","inverse-on-surface":"#e9f1ff","inverse-primary":"#ffb695",
+          "outline":"#8d7165","outline-variant":"#e1bfb1",
+          "primary-fixed":"#ffdbcc","primary-fixed-dim":"#ffb695"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+  .icon-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+  #map{z-index:1}
+  .leaflet-popup-content-wrapper{border-radius:12px!important;padding:0!important;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.3)!important}
+  .leaflet-popup-content{margin:0!important;width:220px!important}
+  .leaflet-popup-tip{background:#1b324a!important}
+  .filter-btn{background:#fff;border:1.5px solid #e5e7eb;color:#374151;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+  .filter-btn:hover{border-color:#f2650b;color:#a23f00}
+  .filter-btn.active{background:#1b324a;border-color:#1b324a;color:#fff}
+  .bar-fill{height:6px;border-radius:99px;transition:width .5s ease}
+  @keyframes countup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .stat-num{animation:countup .4s ease forwards}
+</style>
+</head>
+<body class="bg-background text-on-background font-['Inter'] antialiased min-h-screen flex flex-col">
+
+<!-- Loader -->
+<div id="page-loader" style="position:fixed;inset:0;z-index:9999;background:#1b324a;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease">
+  <img src="logo-ramya.png" style="height:140px;width:auto;margin-bottom:32px;animation:ramya-pulse 2s ease-in-out infinite">
+  <span id="loader-pct" style="font-family:'Manrope',sans-serif;font-size:64px;font-weight:800;color:#ffb695;line-height:1;margin-bottom:20px">0%</span>
+  <div style="width:280px;height:4px;background:rgba(255,255,255,0.15);border-radius:9999px;overflow:hidden;margin-bottom:16px">
+    <div id="loader-bar" style="height:100%;background:#f2650b;border-radius:9999px;width:0%;transition:width 0.1s ease"></div>
+  </div>
+  <p style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.25em;text-transform:uppercase">Chargement en cours…</p>
+</div>
+<style>@keyframes ramya-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(.96)}}</style>
+
+<!-- Navigation -->
+<header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+  <div class="flex justify-between items-center w-full max-w-7xl mx-auto px-6 h-20">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="logo-ramya.png" alt="Logo Ramya" class="h-12 w-auto">
+      <div class="hidden sm:block leading-tight">
+        <div class="font-['Manrope'] text-base font-extrabold text-orange-600 tracking-tight">RAMYA</div>
+        <div class="font-['Manrope'] text-xs font-bold text-[#1a6b6b] tracking-wider">TECHNOLOGIE INNOVATION</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-1 font-['Manrope'] text-sm font-semibold tracking-tight">
+      <a href="index.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Accueil</a>
+      <a href="a-propos.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">À Propos</a>
+      <a href="solutions.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Solutions</a>
+      <a href="projets.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Projets</a>
+      <a href="carte.html" class="text-orange-600 border-b-2 border-orange-600 px-3 py-2">Carte</a>
+      <a href="blog.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Blog</a>
+      <a href="contact.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Recrutement</a>
+    </nav>
+    <div class="hidden md:flex">
+      <a href="contact.html" class="bg-primary text-white font-['Inter'] text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm hover:opacity-90 transition-opacity">Obtenir un Devis</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 text-slate-700">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+    <nav class="flex flex-col px-6 py-4 gap-1 font-['Manrope'] text-sm font-semibold">
+      <a href="index.html" class="py-2 hover:text-orange-600 transition-colors">Accueil</a>
+      <a href="a-propos.html" class="py-2 hover:text-orange-600 transition-colors">À Propos</a>
+      <a href="solutions.html" class="py-2 hover:text-orange-600 transition-colors">Solutions</a>
+      <a href="projets.html" class="py-2 hover:text-orange-600 transition-colors">Projets</a>
+      <a href="carte.html" class="py-2 text-orange-600">Carte</a>
+      <a href="blog.html" class="py-2 hover:text-orange-600 transition-colors">Blog</a>
+      <a href="contact.html" class="py-2 hover:text-orange-600 transition-colors">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="py-2 hover:text-orange-600 transition-colors">Recrutement</a>
+      <a href="contact.html" class="mt-2 bg-primary text-white py-2.5 px-4 rounded-lg text-center">Obtenir un Devis</a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-grow flex flex-col">
+
+  <!-- Hero -->
+  <section class="py-14 px-6 text-white" style="background:linear-gradient(135deg,#1b324a 0%,#0f1f30 60%,#1b324a 100%)">
+    <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle at 20% 80%,rgba(242,101,11,0.4) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,182,149,0.15) 0%,transparent 50%)"></div>
+    <div class="max-w-7xl mx-auto text-center relative z-10">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/80 px-4 py-1.5 rounded-full mb-5">
+        <span class="material-symbols-outlined icon-fill text-[#ffb695]" style="font-size:16px">travel_explore</span>
+        <span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Présence Internationale</span>
+      </div>
+      <h1 class="font-['Manrope'] text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+        Cartographie de nos<br><span class="text-[#ffb695]">Installations</span>
+      </h1>
+      <p class="font-['Inter'] text-lg text-white/60 max-w-xl mx-auto">
+        Découvrez l'étendue de notre réseau d'installations en Côte d'Ivoire et en Afrique — chaque point représente un projet réalisé.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <div class="bg-white border-b border-gray-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-100">
+      <div class="text-center px-4">
+        <div id="s-total" class="stat-num font-['Manrope'] text-3xl font-black text-[#a23f00]">—</div>
+        <div class="font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mt-0.5">Installations</div>
+      </div>
+      <div class="text-center px-4">
+        <div id="s-pays" class="stat-num font-['Manrope'] text-3xl font-black text-[#1b324a]">—</div>
+        <div class="font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mt-0.5">Pays</div>
+      </div>
+      <div class="text-center px-4">
+        <div id="s-villes" class="stat-num font-['Manrope'] text-3xl font-black text-[#1b324a]">—</div>
+        <div class="font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mt-0.5">Villes</div>
+      </div>
+      <div class="text-center px-4">
+        <div id="s-continents" class="stat-num font-['Manrope'] text-3xl font-black text-[#1b324a]">—</div>
+        <div class="font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mt-0.5">Continents</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map section -->
+  <section class="bg-[#f0f4fa] py-8 px-6 flex-grow">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2 mb-5 items-center">
+        <span class="font-['Inter'] text-xs text-gray-400 uppercase tracking-wide mr-2">Filtrer :</span>
+        <button onclick="applyFilter(null,this)" class="filter-btn active px-4 py-1.5 rounded-xl text-sm font-medium">Tous</button>
+        <button onclick="applyFilter('Vidéosurveillance',this)" class="filter-btn px-4 py-1.5 rounded-xl text-sm font-medium">📷 Vidéosurveillance</button>
+        <button onclick="applyFilter('Contrôle d\'Accès',this)" class="filter-btn px-4 py-1.5 rounded-xl text-sm font-medium">🔐 Contrôle d'Accès</button>
+        <button onclick="applyFilter('Alarme Anti-Intrusion',this)" class="filter-btn px-4 py-1.5 rounded-xl text-sm font-medium">🚨 Alarme</button>
+        <button onclick="applyFilter('Sécurité Incendie',this)" class="filter-btn px-4 py-1.5 rounded-xl text-sm font-medium">🔥 SSI Incendie</button>
+        <button onclick="applyFilter('Réseau Informatique',this)" class="filter-btn px-4 py-1.5 rounded-xl text-sm font-medium">🌐 Réseau & IT</button>
+        <button onclick="applyFilter('Clôture Électrique',this)" class="filter-btn px-4 py-1.5 rounded-xl text-sm font-medium">⚡ Clôture</button>
+      </div>
+      <div id="filter-count" class="text-xs text-gray-400 mb-3"></div>
+
+      <!-- Map -->
+      <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-200 mb-8" style="height:560px">
+        <div id="map" style="height:100%;width:100%"></div>
+      </div>
+
+      <!-- Legend -->
+      <div class="flex flex-wrap gap-3 mb-8">
+        <span class="font-['Inter'] text-xs text-gray-400 self-center">Légende :</span>
+        <span id="leg-Vidéosurveillance"     class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#f2650b] inline-block"></span>Vidéosurveillance</span>
+        <span id="leg-Contrôle d'Accès"      class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#1b324a] inline-block"></span>Contrôle d'Accès</span>
+        <span id="leg-Alarme Anti-Intrusion" class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#dc2626] inline-block"></span>Alarme Anti-Intrusion</span>
+        <span id="leg-Sécurité Incendie"     class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#f59e0b] inline-block"></span>Sécurité Incendie</span>
+        <span id="leg-Réseau Informatique"   class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#0d9488] inline-block"></span>Réseau Informatique</span>
+        <span id="leg-Clôture Électrique"    class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#7c3aed] inline-block"></span>Clôture Électrique</span>
+        <span id="leg-Autre"                 class="legend-item flex items-center gap-1.5 bg-white border border-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700"><span class="w-3 h-3 rounded-full bg-[#6b7280] inline-block"></span>Autre</span>
+      </div>
+
+      <!-- Stats détaillées -->
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+
+        <!-- Par type -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <h3 class="font-['Manrope'] font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-orange-500 icon-fill" style="font-size:18px">pie_chart</span>
+            Par type d'installation
+          </h3>
+          <div id="stats-types" class="space-y-3"></div>
+        </div>
+
+        <!-- Par pays -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <h3 class="font-['Manrope'] font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-orange-500 icon-fill" style="font-size:18px">public</span>
+            Par pays
+          </h3>
+          <div id="stats-pays" class="space-y-3"></div>
+        </div>
+
+        <!-- Par ville -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <h3 class="font-['Manrope'] font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-orange-500 icon-fill" style="font-size:18px">location_city</span>
+            Top villes
+          </h3>
+          <div id="stats-villes-detail" class="space-y-3"></div>
+        </div>
+
+      </div>
+
+      <!-- Liste installations -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100">
+          <h3 class="font-['Manrope'] font-bold text-gray-800 flex items-center gap-2">
+            <span class="material-symbols-outlined text-orange-500" style="font-size:18px">list_alt</span>
+            Liste des installations
+          </h3>
+          <span id="list-count" class="bg-gray-100 text-gray-600 text-xs font-semibold px-2.5 py-1 rounded-full"></span>
+        </div>
+        <div id="installations-list" class="divide-y divide-gray-50"></div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300">
+  <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div>
+        <img src="logo-ramya.png" class="h-14 w-auto bg-white rounded-xl p-2 mb-4">
+        <p class="text-sm text-slate-400 leading-relaxed"><em class="text-orange-400">"Protégé... partout où vous êtes"</em></p>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-4">Liens Rapides</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="hover:text-orange-400 transition-colors">Accueil</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Nos Solutions</a></li>
+          <li><a href="projets.html" class="hover:text-orange-400 transition-colors">Projets</a></li>
+          <li><a href="carte.html" class="hover:text-orange-400 transition-colors">Carte des installations</a></li>
+          <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact</a></li>
+          <li><a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="hover:text-orange-400 transition-colors">Recrutement</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-4">Nos Solutions</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Vidéosurveillance CCTV</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Contrôle d'Accès</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Alarme Anti-Intrusion</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Tracking GPS</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Réseau Informatique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-4">Contact</h4>
+        <ul class="space-y-3 text-sm">
+          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">location_on</span><span class="text-slate-400">813 Route d'Abatta, Cocody, Abidjan</span></li>
+          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">phone</span><span class="text-slate-400">+225 27 22 20 44 98</span></li>
+          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">mail</span><a href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400">infos@ramyatechnologie.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+      © 2025 Ramya Technologie Innovation. Tous droits réservés.
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── Config couleurs par type ──────────────────────────
+const TYPE_COLORS = {
+  'Vidéosurveillance':    '#f2650b',
+  'Contrôle d\'Accès':   '#1b324a',
+  'Alarme Anti-Intrusion':'#dc2626',
+  'Sécurité Incendie':   '#f59e0b',
+  'Réseau Informatique': '#0d9488',
+  'Clôture Électrique':  '#7c3aed',
+  'GPS / Tracking':      '#10b981',
+  'Autre':               '#6b7280',
+};
+function typeColor(t){ return TYPE_COLORS[t] || '#6b7280'; }
+
+// ── Demo data fallback ────────────────────────────────
+const DEMO = [
+  {id:'d1',nom:'Hôtel Ivoire Sofitel',type:'Vidéosurveillance',quartier:'Cocody',ville:'Abidjan',pays:"Côte d'Ivoire",continent:'Afrique',lat:5.3419,lng:-3.9958,date:'2022-03',equip:'64 caméras IP 4K',desc:'Surveillance complète lobby et parking'},
+  {id:'d2',nom:'Aéroport FHB',type:"Contrôle d'Accès",quartier:'Port-Bouët',ville:'Abidjan',pays:"Côte d'Ivoire",continent:'Afrique',lat:5.2613,lng:-3.926,date:'2021-11',equip:'32 lecteurs biométriques',desc:'Zones restreintes haute sécurité'},
+  {id:'d3',nom:"Port Autonome d'Abidjan",type:'Vidéosurveillance',quartier:'Vridi',ville:'Abidjan',pays:"Côte d'Ivoire",continent:'Afrique',lat:5.2904,lng:-4.0086,date:'2023-01',equip:'128 caméras HD',desc:'Surveillance périmétrique portuaire'},
+  {id:'d4',nom:'CHU de Bouaké',type:'Sécurité Incendie',quartier:'Centre',ville:'Bouaké',pays:"Côte d'Ivoire",continent:'Afrique',lat:7.6944,lng:-5.0314,date:'2023-10',equip:'320 détecteurs',desc:'SSI hôpital régional'},
+  {id:'d5',nom:'Hôtel Azalaï',type:'Vidéosurveillance',quartier:'Plateau',ville:'Dakar',pays:'Sénégal',continent:'Afrique',lat:14.6937,lng:-17.4441,date:'2023-06',equip:'40 caméras',desc:'Surveillance hôtelière'},
+  {id:'d6',nom:'Société Minière',type:'Clôture Électrique',quartier:'Zone Ind.',ville:'Ouagadougou',pays:'Burkina Faso',continent:'Afrique',lat:12.3686,lng:-1.5247,date:'2024-03',equip:'2,4 km de clôture',desc:'Protection périmétrique site minier'},
+];
+
+let all = [], markers = [], map, currentFilter = null;
+
+// ── Chargement données ────────────────────────────────
+async function loadData(){
+  // 1. Essai localStorage (depuis admin)
+  const local = localStorage.getItem('ramya_installations');
+  if(local){ try{ all = JSON.parse(local); }catch(e){} }
+
+  // 2. Essai fetch JSON
+  if(!all.length){
+    try{
+      const r = await fetch('data/installations.json');
+      if(r.ok) all = await r.json();
+    }catch(e){}
+  }
+
+  // 3. Demo fallback
+  if(!all.length) all = DEMO;
+
+  initMap();
+  renderAll();
+}
+
+// ── Initialisation carte ──────────────────────────────
+function initMap(){
+  map = L.map('map',{center:[8,-4],zoom:6,zoomControl:true});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+    attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com">CARTO</a>',
+    subdomains:'abcd',maxZoom:19
+  }).addTo(map);
+}
+
+// ── Affichage marqueurs ───────────────────────────────
+function renderMarkers(data){
+  markers.forEach(m=>map.removeLayer(m));
+  markers=[];
+  data.forEach(inst=>{
+    const col = typeColor(inst.type);
+    const m = L.circleMarker([inst.lat,inst.lng],{
+      radius:10, fillColor:col, fillOpacity:.92,
+      color:'#fff', weight:2.5, opacity:1
+    });
+    const dateStr = inst.date ? inst.date.split('-').reverse().join('/') : '';
+    m.bindPopup(`
+      <div>
+        <div style="background:${col};color:#fff;padding:10px 14px;font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;line-height:1.3">${inst.nom}</div>
+        <div style="padding:12px 14px;font-family:'Inter',sans-serif">
+          <span style="display:inline-block;background:#f0f4fa;color:#1b324a;font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;margin-bottom:8px">${inst.type}</span>
+          <div style="font-size:12px;color:#374151;margin-bottom:3px">📍 <strong>${inst.quartier||''}</strong>${inst.quartier?', ':''}${inst.ville}, ${inst.pays}</div>
+          ${inst.date?`<div style="font-size:11px;color:#6b7280;margin-bottom:3px">🗓️ ${dateStr}</div>`:''}
+          ${inst.equip?`<div style="font-size:11px;color:#6b7280;margin-bottom:3px">🔧 ${inst.equip}</div>`:''}
+          ${inst.desc?`<div style="font-size:11px;color:#374151;margin-top:6px;font-style:italic">${inst.desc}</div>`:''}
+        </div>
+      </div>
+    `,{maxWidth:240});
+    m.addTo(map);
+    markers.push(m);
+  });
+}
+
+// ── Filtre ────────────────────────────────────────────
+function applyFilter(type, btn){
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = type ? all.filter(i=>i.type===type) : all;
+  renderMarkers(filtered);
+  document.getElementById('filter-count').textContent =
+    type ? `${filtered.length} installation(s) de type "${type}" affichée(s)` : '';
+  renderList(filtered);
+}
+
+// ── Stats ─────────────────────────────────────────────
+function renderStats(){
+  const total = all.length;
+  const pays   = [...new Set(all.map(i=>i.pays))];
+  const villes = [...new Set(all.map(i=>i.ville))];
+  const conts  = [...new Set(all.map(i=>i.continent).filter(Boolean))];
+
+  document.getElementById('s-total').textContent      = total;
+  document.getElementById('s-pays').textContent       = pays.length;
+  document.getElementById('s-villes').textContent     = villes.length;
+  document.getElementById('s-continents').textContent = conts.length;
+
+  // Par type
+  const byType = {};
+  all.forEach(i=>{ byType[i.type]=(byType[i.type]||0)+1; });
+  const maxType = Math.max(...Object.values(byType));
+  document.getElementById('stats-types').innerHTML = Object.entries(byType)
+    .sort((a,b)=>b[1]-a[1])
+    .map(([t,n])=>`
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-medium text-gray-700">${t}</span>
+          <span class="text-xs font-bold text-gray-800">${n}</span>
+        </div>
+        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div class="bar-fill h-full rounded-full" style="width:${(n/maxType*100).toFixed(0)}%;background:${typeColor(t)}"></div>
+        </div>
+      </div>
+    `).join('');
+
+  // Par pays
+  const byPays = {};
+  all.forEach(i=>{ byPays[i.pays]=(byPays[i.pays]||0)+1; });
+  const maxPays = Math.max(...Object.values(byPays));
+  document.getElementById('stats-pays').innerHTML = Object.entries(byPays)
+    .sort((a,b)=>b[1]-a[1])
+    .map(([p,n])=>`
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-medium text-gray-700">${p}</span>
+          <span class="text-xs font-bold text-gray-800">${n}</span>
+        </div>
+        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div class="bar-fill h-full rounded-full" style="width:${(n/maxPays*100).toFixed(0)}%;background:#1b324a"></div>
+        </div>
+      </div>
+    `).join('');
+
+  // Par ville (top 6)
+  const byVille = {};
+  all.forEach(i=>{ byVille[i.ville]=(byVille[i.ville]||0)+1; });
+  const maxVille = Math.max(...Object.values(byVille));
+  document.getElementById('stats-villes-detail').innerHTML = Object.entries(byVille)
+    .sort((a,b)=>b[1]-a[1]).slice(0,6)
+    .map(([v,n])=>`
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-medium text-gray-700">${v}</span>
+          <span class="text-xs font-bold text-gray-800">${n}</span>
+        </div>
+        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div class="bar-fill h-full rounded-full" style="width:${(n/maxVille*100).toFixed(0)}%;background:#f2650b"></div>
+        </div>
+      </div>
+    `).join('');
+}
+
+// ── Liste installations ───────────────────────────────
+function renderList(data){
+  document.getElementById('list-count').textContent = `${data.length} installation(s)`;
+  document.getElementById('installations-list').innerHTML = data
+    .map(i=>`
+      <div class="flex items-center gap-4 px-6 py-4 hover:bg-gray-50 transition-colors cursor-pointer"
+           onclick="flyTo(${i.lat},${i.lng},'${i.id}')">
+        <div class="w-3 h-3 rounded-full shrink-0" style="background:${typeColor(i.type)}"></div>
+        <div class="flex-1 min-w-0">
+          <div class="font-['Manrope'] text-sm font-bold text-gray-800 truncate">${i.nom}</div>
+          <div class="flex items-center gap-3 mt-0.5">
+            <span class="text-xs text-gray-500">📍 ${i.quartier?i.quartier+', ':''}${i.ville}, ${i.pays}</span>
+          </div>
+        </div>
+        <div class="shrink-0 text-right">
+          <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background:${typeColor(i.type)}20;color:${typeColor(i.type)}">${i.type}</span>
+          ${i.date?`<div class="text-xs text-gray-400 mt-0.5">${i.date.split('-').reverse().join('/')}</div>`:''}
+        </div>
+      </div>
+    `).join('');
+}
+
+function flyTo(lat,lng,id){
+  map.flyTo([lat,lng],14,{duration:1.2});
+  const idx = all.findIndex(i=>i.id===id);
+  if(idx>=0 && markers[idx]) markers[idx].openPopup();
+}
+
+function renderAll(){
+  renderMarkers(all);
+  renderStats();
+  renderList(all);
+}
+
+// ── Démarrage ─────────────────────────────────────────
+loadData();
+
+// ── Nav ───────────────────────────────────────────────
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+</script>
+<script>(function(){var l=document.getElementById('page-loader');if(sessionStorage.getItem('ramya_loaded')){l.style.display='none';return;}sessionStorage.setItem('ramya_loaded','1');var p=document.getElementById('loader-pct'),b=document.getElementById('loader-bar'),c=0;var iv=setInterval(function(){c+=Math.random()*10+2;if(c>=100){c=100;clearInterval(iv);setTimeout(function(){l.style.opacity='0';setTimeout(function(){l.style.display='none'},600)},400);}p.textContent=Math.floor(c)+'%';b.style.width=c+'%';},60);})();</script>
+</body>
+</html>

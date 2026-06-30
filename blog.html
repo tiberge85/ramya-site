@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Actualités - Ramya Technologie Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#a23f00","primary-container": "#f2650b","on-primary": "#ffffff","on-primary-container": "#4c1a00",
+          "primary-fixed": "#ffdbcc","primary-fixed-dim": "#ffb695","surface-tint": "#a23f00","inverse-primary": "#ffb695",
+          "on-primary-fixed": "#351000","on-primary-fixed-variant": "#7b2f00",
+          "secondary": "#545e76","on-secondary": "#ffffff","secondary-container": "#d7e2ff","on-secondary-container": "#5a647c",
+          "secondary-fixed": "#d7e2ff","secondary-fixed-dim": "#bbc6e2","on-secondary-fixed": "#101b30","on-secondary-fixed-variant": "#3c475d",
+          "tertiary": "#47607e","on-tertiary": "#ffffff","tertiary-container": "#7a93b3","on-tertiary-container": "#0f2b46",
+          "tertiary-fixed": "#d1e4ff","tertiary-fixed-dim": "#afc9ea","on-tertiary-fixed": "#001d36","on-tertiary-fixed-variant": "#2f4865",
+          "background": "#f8f9ff","on-background": "#031d34","surface": "#f8f9ff","on-surface": "#031d34",
+          "surface-variant": "#d1e4ff","on-surface-variant": "#594137","surface-dim": "#c5dcfb","surface-bright": "#f8f9ff",
+          "surface-container-lowest": "#ffffff","surface-container-low": "#eef4ff","surface-container": "#e5efff",
+          "surface-container-high": "#dbe9ff","surface-container-highest": "#d1e4ff",
+          "inverse-surface": "#1b324a","inverse-on-surface": "#e9f1ff",
+          "outline": "#8d7165","outline-variant": "#e1bfb1",
+          "error": "#ba1a1a","on-error": "#ffffff","error-container": "#ffdad6","on-error-container": "#93000a"
+        },
+        borderRadius: { "DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px" },
+        spacing: { "base": "8px","xs": "4px","sm": "12px","md": "24px","lg": "48px","xl": "80px","gutter": "24px","margin": "32px" },
+        fontFamily: { "h1": ["Manrope"],"h2": ["Manrope"],"h3": ["Manrope"],"body-lg": ["Inter"],"body-md": ["Inter"],"label-md": ["Inter"],"button": ["Inter"] },
+        fontSize: {
+          "h1": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+          "h2": ["36px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "h3": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+          "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+          "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+          "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "500" }],
+          "button": ["16px", { lineHeight: "1", fontWeight: "600" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<div id="page-loader" style="position:fixed;inset:0;z-index:9999;background:#1b324a;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease"><img src="logo-ramya.png" style="height:140px;width:auto;margin-bottom:32px;animation:ramya-pulse 2s ease-in-out infinite"><span id="loader-pct" style="font-family:'Manrope',sans-serif;font-size:64px;font-weight:800;color:#ffb695;line-height:1;margin-bottom:20px">0%</span><div style="width:280px;height:4px;background:rgba(255,255,255,0.15);border-radius:9999px;overflow:hidden;margin-bottom:16px"><div id="loader-bar" style="height:100%;background:#f2650b;border-radius:9999px;width:0%;transition:width 0.1s ease"></div></div><p style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.25em;text-transform:uppercase">Chargement en cours…</p></div>
+<style>@keyframes ramya-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(.96)}}</style>
+
+<!-- Navigation -->
+<header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+  <div class="flex justify-between items-center w-full max-w-7xl mx-auto px-6 h-20">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="logo-ramya.png" alt="Logo Ramya" class="h-12 w-auto">
+      <div class="hidden sm:block leading-tight">
+        <div class="font-['Manrope'] text-base font-extrabold text-orange-600 tracking-tight">RAMYA</div>
+        <div class="font-['Manrope'] text-xs font-bold text-[#1a6b6b] tracking-wider">TECHNOLOGIE INNOVATION</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-1 font-['Manrope'] text-sm font-semibold tracking-tight">
+      <a href="index.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Accueil</a>
+      <a href="a-propos.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">À Propos</a>
+      <a href="solutions.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Solutions</a>
+      <a href="projets.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Projets</a>
+      <a href="carte.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Carte</a>
+      <a href="blog.html" class="text-orange-600 border-b-2 border-orange-600 px-3 py-2">Blog</a>
+      <a href="contact.html" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="text-slate-700 hover:text-orange-600 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Recrutement</a>
+    </nav>
+    <div class="hidden md:flex">
+      <a href="contact.html" class="bg-primary text-white font-['Inter'] text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm hover:opacity-90 transition-opacity">Obtenir un Devis</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 text-slate-700">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+    <nav class="flex flex-col px-6 py-4 gap-1 font-['Manrope'] text-sm font-semibold">
+      <a href="index.html" class="py-2 hover:text-orange-600 transition-colors">Accueil</a>
+      <a href="a-propos.html" class="py-2 hover:text-orange-600 transition-colors">À Propos</a>
+      <a href="solutions.html" class="py-2 hover:text-orange-600 transition-colors">Solutions</a>
+      <a href="projets.html" class="py-2 hover:text-orange-600 transition-colors">Projets</a>
+      <a href="carte.html" class="py-2 hover:text-orange-600 transition-colors">Carte</a>
+      <a href="blog.html" class="py-2 text-orange-600">Blog</a>
+      <a href="contact.html" class="py-2 hover:text-orange-600 transition-colors">Contact</a>
+      <a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="py-2 hover:text-orange-600 transition-colors">Recrutement</a>
+      <a href="contact.html" class="mt-2 bg-primary text-white py-2.5 px-4 rounded-lg text-center">Obtenir un Devis</a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex-grow max-w-7xl mx-auto px-6 py-16">
+
+  <!-- Page Header -->
+  <div class="mb-12">
+    <h1 class="font-['Manrope'] text-5xl font-bold text-on-background mb-4 tracking-tight">Blog & Actualités</h1>
+    <p class="font-['Inter'] text-lg text-on-surface-variant max-w-3xl leading-relaxed">
+      Restez informé des dernières tendances en matière de sécurité électronique en Côte d'Ivoire et en Afrique de l'Ouest : vidéosurveillance IA, contrôle d'accès biométrique, géolocalisation et normes de sécurité incendie.
+    </p>
+  </div>
+
+  <!-- Article à la Une -->
+  <div id="blog-featured" class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
+
+    <!-- Article Principal -->
+    <article class="lg:col-span-8 group cursor-pointer relative rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-outline-variant bg-surface">
+      <div class="aspect-video w-full bg-surface-container-high relative overflow-hidden">
+        <img src="images/cloture-electrique.jpg" alt="IA Vidéosurveillance" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute top-4 left-4">
+          <span class="bg-primary text-white font-['Inter'] text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">À la une</span>
+        </div>
+      </div>
+      <div class="p-8">
+        <div class="flex items-center gap-4 text-secondary font-['Inter'] text-xs mb-4">
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined" style="font-size:14px">calendar_today</span> 15 Avril 2025
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined" style="font-size:14px">videocam</span> Vidéosurveillance
+          </span>
+          <span>•</span>
+          <span>8 min de lecture</span>
+        </div>
+        <h2 class="font-['Manrope'] text-3xl font-semibold text-on-surface mb-4 group-hover:text-primary transition-colors leading-tight">L'Intelligence Artificielle au cœur de la nouvelle génération de vidéosurveillance</h2>
+        <p class="font-['Inter'] text-base text-on-surface-variant mb-6 leading-relaxed line-clamp-2">
+          Découvrez comment l'IA transforme les simples caméras en systèmes d'analyse prédictive, réduisant les fausses alertes et améliorant les temps de réponse pour les entreprises ivoiriennes.
+        </p>
+        <div class="flex items-center text-primary font-['Inter'] font-semibold text-sm group-hover:underline">
+          Lire l'article <span class="material-symbols-outlined ml-1" style="font-size:18px">arrow_forward</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Articles Secondaires -->
+    <div class="lg:col-span-4 flex flex-col gap-4">
+      <article class="flex-1 group cursor-pointer rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-outline-variant bg-surface flex flex-col">
+        <div class="h-44 relative overflow-hidden">
+          <img src="images/fournitures-informatiques.jpg" alt="Contrôle d'accès biométrique" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <div class="flex items-center gap-2 text-secondary font-['Inter'] text-xs mb-2">
+            <span class="material-symbols-outlined" style="font-size:14px">fingerprint</span> Biométrie · 20 Mars 2025
+          </div>
+          <h3 class="font-['Manrope'] text-lg font-semibold text-on-surface mb-3 group-hover:text-primary transition-colors line-clamp-2">Contrôle d'accès biométrique : état de l'art en 2025</h3>
+          <div class="flex items-center text-primary font-['Inter'] font-semibold text-sm mt-auto">
+            Lire <span class="material-symbols-outlined ml-1" style="font-size:16px">arrow_forward</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-1 group cursor-pointer rounded-xl overflow-hidden border-l-4 border-primary shadow-sm hover:shadow-md transition-shadow bg-surface flex flex-col border border-outline-variant">
+        <div class="p-5 flex-1 flex flex-col">
+          <div class="flex items-center gap-2 text-secondary font-['Inter'] text-xs mb-3">
+            <span class="material-symbols-outlined" style="font-size:14px">local_fire_department</span> Sécurité Incendie · 5 Fév 2025
+          </div>
+          <h3 class="font-['Manrope'] text-lg font-semibold text-on-surface mb-3 group-hover:text-primary transition-colors">Systèmes SSI : Nouvelles Obligations en Côte d'Ivoire</h3>
+          <p class="font-['Inter'] text-sm text-on-surface-variant line-clamp-2 leading-relaxed">Un décryptage complet des nouvelles réglementations sur les Systèmes de Sécurité Incendie dans les ERP et les ERT.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Filtre par Catégorie -->
+  <div class="flex flex-wrap items-center gap-3 mb-10 border-b border-outline-variant pb-6">
+    <span class="font-['Inter'] text-xs font-medium text-on-surface-variant uppercase tracking-widest">Filtrer :</span>
+    <button class="bg-primary text-white font-['Inter'] text-sm font-semibold px-4 py-2 rounded-full shadow-sm">Tous</button>
+    <button class="bg-surface-container text-on-surface font-['Inter'] text-sm font-semibold px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors">Vidéosurveillance</button>
+    <button class="bg-surface-container text-on-surface font-['Inter'] text-sm font-semibold px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors">Contrôle d'Accès</button>
+    <button class="bg-surface-container text-on-surface font-['Inter'] text-sm font-semibold px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors">Sécurité Incendie</button>
+    <button class="bg-surface-container text-on-surface font-['Inter'] text-sm font-semibold px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors">Géolocalisation</button>
+  </div>
+
+  <!-- Grille d'Articles (générée dynamiquement) -->
+  <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    <!-- Articles chargés depuis data/articles.json -->
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center items-center gap-2">
+    <button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container">
+      <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+    <button class="w-10 h-10 rounded-full bg-primary text-white font-['Inter'] font-semibold text-sm shadow-sm">1</button>
+    <button class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container text-on-surface font-['Inter'] font-semibold text-sm transition-colors">2</button>
+    <button class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container text-on-surface font-['Inter'] font-semibold text-sm transition-colors">3</button>
+    <span class="text-on-surface-variant mx-1 font-['Inter'] text-sm">...</span>
+    <button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300 mt-auto">
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="mb-4">
+          <img src="logo-ramya.png" alt="Ramya Technologie Innovation" class="h-16 w-auto bg-white rounded-xl p-2">
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed mb-5">Spécialisée dans la sécurité électronique et la domotique depuis 2017.<br><em class="text-orange-400">"Protégé... partout où vous êtes"</em></p>
+        <div class="flex gap-3">
+          <a href="https://www.facebook.com/ramyatechinnovation" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-orange-600 rounded-lg flex items-center justify-center transition-colors"><span class="font-bold text-xs">f</span></a>
+          <a href="https://www.instagram.com/ramyatechnology" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-orange-600 rounded-lg flex items-center justify-center transition-colors"><span class="material-symbols-outlined" style="font-size:16px">photo_camera</span></a>
+          <a href="https://wa.me/2250950243" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors"><span class="material-symbols-outlined" style="font-size:16px">chat</span></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Liens Rapides</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="index.html" class="hover:text-orange-400 transition-colors">Accueil</a></li>
+          <li><a href="a-propos.html" class="hover:text-orange-400 transition-colors">À Propos</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Nos Solutions</a></li>
+          <li><a href="projets.html" class="hover:text-orange-400 transition-colors">Projets & Réalisations</a></li>
+          <li><a href="blog.html" class="text-orange-400">Blog & Actualités</a></li>
+          <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact</a></li>
+          <li><a href="https://rapport-pointage.ramyaci.tech/emplois" target="_blank" rel="noopener" class="hover:text-orange-400 transition-colors">Recrutement</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Nos Services</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Vidéosurveillance CCTV</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Contrôle d'Accès</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Géolocalisation GPS</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Sécurité Incendie</a></li>
+          <li><a href="solutions.html" class="hover:text-orange-400 transition-colors">Dépannage & Maintenance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-['Manrope'] text-sm font-bold text-white mb-5">Nous Contacter</h4>
+        <ul class="space-y-4 text-sm">
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">location_on</span>
+            <span class="text-slate-400">813 Route d'Abatta, Cocody<br>Abidjan, Côte d'Ivoire</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">phone</span>
+            <span class="text-slate-400">+225 27 22 20 44 98<br>+225 07 09 50 02 43</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">mail</span>
+            <a href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400 transition-colors">infos@ramyatechnologie.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+      <p>© 2025 Ramya Technologie Innovation. Tous droits réservés.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-orange-400 transition-colors">Politique de Confidentialité</a>
+        <a href="#" class="hover:text-orange-400 transition-colors">Conditions d'Utilisation</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('menu-toggle').addEventListener('click', function() {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+
+// ── Chargement dynamique des articles ────────────────
+async function loadBlog() {
+  let articles = [];
+
+  // 1. localStorage (admin en cours de prévisualisation)
+  const local = localStorage.getItem('ramya_admin_articles');
+  if (local) { try { articles = JSON.parse(local); } catch(e) {} }
+
+  // 2. Fichier JSON (source de vérité)
+  if (!articles.length) {
+    try {
+      const r = await fetch('data/articles.json');
+      if (r.ok) {
+        const j = await r.json();
+        articles = Array.isArray(j) ? j : (j.articles || []);
+      }
+    } catch(e) {}
+  }
+
+  if (!articles.length) return; // garde le HTML statique si tout échoue
+
+  renderFeatured(articles);
+  renderGrid(articles);
+}
+
+function fmtDate(d) {
+  if (!d) return '';
+  const dt = new Date(d);
+  return isNaN(dt) ? d : dt.toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+}
+
+function renderFeatured(articles) {
+  const une = articles.find(a => a.une) || articles[0];
+  const secondary = articles.filter(a => a.id !== une.id).slice(0, 2);
+  const el = document.getElementById('blog-featured');
+  if (!el) return;
+
+  el.innerHTML = `
+    <article class="lg:col-span-8 group cursor-pointer relative rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-outline-variant bg-surface">
+      <div class="aspect-video w-full bg-surface-container-high relative overflow-hidden">
+        ${une.img
+          ? `<img src="${une.img}" alt="${une.titre}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">`
+          : `<div class="w-full h-full bg-[#1b324a] flex items-center justify-center"><span class="material-symbols-outlined text-white/20" style="font-size:80px">article</span></div>`
+        }
+        <div class="absolute top-4 left-4">
+          <span class="bg-primary text-white font-['Inter'] text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">À la une</span>
+        </div>
+      </div>
+      <div class="p-8">
+        <div class="flex items-center gap-4 text-secondary font-['Inter'] text-xs mb-4">
+          <span>${fmtDate(une.date)}</span>
+          <span>•</span><span>${une.cat}</span>
+          <span>•</span><span>${une.lecture || ''}</span>
+        </div>
+        <h2 class="font-['Manrope'] text-3xl font-semibold text-on-surface mb-4 group-hover:text-primary transition-colors leading-tight">${une.titre}</h2>
+        <p class="font-['Inter'] text-base text-on-surface-variant mb-6 leading-relaxed line-clamp-2">${une.resume}</p>
+        <div class="flex items-center text-primary font-['Inter'] font-semibold text-sm group-hover:underline">
+          Lire l'article <span class="material-symbols-outlined ml-1" style="font-size:18px">arrow_forward</span>
+        </div>
+      </div>
+    </article>
+    <div class="lg:col-span-4 flex flex-col gap-4">
+      ${secondary.map(a => `
+        <article class="flex-1 group cursor-pointer rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-outline-variant bg-surface flex flex-col">
+          ${a.img
+            ? `<div class="h-44 relative overflow-hidden"><img src="${a.img}" alt="${a.titre}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"></div>`
+            : `<div class="h-32 bg-[#1b324a] flex items-center justify-center"><span class="material-symbols-outlined text-white/20" style="font-size:40px">article</span></div>`
+          }
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="text-secondary font-['Inter'] text-xs mb-2">${a.cat} · ${fmtDate(a.date)}</div>
+            <h3 class="font-['Manrope'] text-lg font-semibold text-on-surface mb-3 group-hover:text-primary transition-colors line-clamp-2">${a.titre}</h3>
+            <div class="flex items-center text-primary font-['Inter'] font-semibold text-sm mt-auto">
+              Lire <span class="material-symbols-outlined ml-1" style="font-size:16px">arrow_forward</span>
+            </div>
+          </div>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderGrid(articles) {
+  const featured = articles.find(a => a.une) || articles[0];
+  const rest = articles.filter(a => a.id !== featured.id).slice(2);
+  const el = document.getElementById('blog-grid');
+  if (!el) return;
+
+  const cards = rest.map(a => `
+    <article class="group cursor-pointer rounded-xl bg-surface border border-outline-variant shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full">
+      <div class="aspect-video overflow-hidden rounded-t-xl bg-surface-container-high">
+        ${a.img
+          ? `<img src="${a.img}" alt="${a.titre}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">`
+          : `<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:48px;opacity:0.3">article</span></div>`
+        }
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-tertiary font-['Inter'] text-xs font-medium bg-tertiary-fixed-dim/30 px-2 py-1 rounded">${a.cat}</span>
+          <span class="text-secondary font-['Inter'] text-xs">${fmtDate(a.date)}</span>
+        </div>
+        <h3 class="font-['Manrope'] text-xl font-semibold text-on-surface mb-3 group-hover:text-primary transition-colors">${a.titre}</h3>
+        <p class="font-['Inter'] text-sm text-on-surface-variant mb-6 flex-1 leading-relaxed">${a.resume}</p>
+        <div class="flex items-center text-primary font-['Inter'] font-semibold text-sm">
+          Lire la suite <span class="material-symbols-outlined ml-1" style="font-size:16px">arrow_forward</span>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  // Toujours ajouter la carte newsletter en dernière position
+  const newsletter = `
+    <article class="rounded-xl bg-inverse-surface text-white border border-white/10 p-6 flex flex-col justify-between shadow-md">
+      <div>
+        <span class="material-symbols-outlined text-inverse-primary icon-fill mb-4 block" style="font-size:36px">notifications</span>
+        <h3 class="font-['Manrope'] text-xl font-semibold text-white mb-3">Restez informé</h3>
+        <p class="font-['Inter'] text-sm text-secondary-fixed-dim leading-relaxed mb-6">Recevez nos derniers articles et conseils en sécurité électronique directement dans votre boîte mail.</p>
+      </div>
+      <div class="flex flex-col gap-3">
+        <input type="email" placeholder="Votre adresse email" class="bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 font-['Inter'] text-sm text-white placeholder-white/50 focus:outline-none focus:border-primary">
+        <button type="button" class="bg-primary text-white font-['Inter'] font-semibold py-2.5 rounded-lg hover:bg-surface-tint transition-colors">S'abonner</button>
+      </div>
+    </article>
+  `;
+
+  el.innerHTML = cards + newsletter;
+}
+
+loadBlog();
+</script>
+<script>(function(){var l=document.getElementById('page-loader');if(sessionStorage.getItem('ramya_loaded')){l.style.display='none';return;}sessionStorage.setItem('ramya_loaded','1');var p=document.getElementById('loader-pct'),b=document.getElementById('loader-bar'),c=0;var iv=setInterval(function(){c+=Math.random()*10+2;if(c>=100){c=100;clearInterval(iv);setTimeout(function(){l.style.opacity='0';setTimeout(function(){l.style.display='none'},600)},400);}p.textContent=Math.floor(c)+'%';b.style.width=c+'%';},60);})();</script>
+</body>
+</html>

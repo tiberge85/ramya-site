@@ -1,0 +1,13 @@
+# Configuration Netlify — site vitrine Ramya Technologie
+# Site statique : aucune compilation, on publie le dossier tel quel.
+
+[build]
+  publish = "."
+  command = ""
+
+# Sécurité : empêche d'autres sites d'afficher le tien dans un cadre.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"

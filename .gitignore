@@ -1,0 +1,11 @@
+# Fichiers système macOS
+.DS_Store
+**/.DS_Store
+
+# Aperçus / paquets macOS
+*.rtfd/
+index.rtfd/
+
+# Divers
+Thumbs.db
+*.log

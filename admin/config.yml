@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Langue de l'interface
+locale: fr
+
+# Dossier où sont rangées les images téléversées depuis l'admin
+media_folder: images
+public_folder: /images
+
+# Message affiché en haut de l'admin
+site_url: https://ramyatechnologie.netlify.app
+display_url: https://ramyatechnologie.netlify.app
+
+collections:
+  - name: blog
+    label: "Blog — Articles"
+    files:
+      - name: articles
+        label: "Liste des articles"
+        file: data/articles.json
+        description: "Ajoute, modifie ou supprime les articles du blog."
+        fields:
+          - label: "Articles"
+            name: articles
+            widget: list
+            label_singular: "Article"
+            summary: "{{fields.titre}}"
+            fields:
+              - { label: "Identifiant (unique)", name: id, widget: string, hint: "Ex. 009 — laisse unique" }
+              - { label: "Titre", name: titre, widget: string }
+              - label: "Catégorie"
+                name: cat
+                widget: select
+                options:
+                  - Vidéosurveillance
+                  - "Contrôle d'Accès"
+                  - "Sécurité Incendie"
+                  - "Géolocalisation"
+                  - "Sécurité Résidentielle"
+                  - "Systèmes Intégrés"
+              - { label: "Date", name: date, widget: string, hint: "Format AAAA-MM-JJ, ex. 2025-04-15" }
+              - { label: "Auteur", name: auteur, widget: string, default: "Équipe Ramya" }
+              - { label: "Temps de lecture", name: lecture, widget: string, default: "5 min de lecture" }
+              - { label: "Image", name: img, widget: image, required: false, hint: "Téléverse une photo ou laisse vide" }
+              - { label: "Résumé", name: resume, widget: text }
+              - { label: "À la une ?", name: une, widget: boolean, required: false, default: false }

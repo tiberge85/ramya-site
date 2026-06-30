@@ -1,0 +1,85 @@
+{
+  "articles": [
+    {
+      "id": "001",
+      "titre": "L'Intelligence Artificielle au cœur de la nouvelle génération de vidéosurveillance",
+      "cat": "Vidéosurveillance",
+      "date": "2025-04-15",
+      "auteur": "Équipe Ramya",
+      "lecture": "8 min de lecture",
+      "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuAbjrbNP06A-mpD5m4sMpK6kFcNkCs3Qhtzlep5Lh7Y9Wnus4mtEUvhr5R0X8BTCbhGMtkO3Y71-AyT9Lq4ThuNEmVJqqY8XkLRKJ3cQai4mTR4kTJuQUeJ0A-eIrQ-aeC9wy8HDwPmbOgvh3qSWKZFSxf8jNg9xNVmRPsryQ9Ug55nz-mDOCeFo5CcIsAi0Ypa3a4aBvDZfpQPZ1SdIthsaRxIMJIz47sHHuUen5m7oARevazIjfbCmQiRmBRrUgOrSb1DmNDJ",
+      "resume": "Découvrez comment l'IA transforme les simples caméras en systèmes d'analyse prédictive, réduisant les fausses alertes et améliorant les temps de réponse pour les entreprises ivoiriennes.",
+      "une": true
+    },
+    {
+      "id": "002",
+      "titre": "Contrôle d'accès biométrique : état de l'art en 2025",
+      "cat": "Contrôle d'Accès",
+      "date": "2025-03-20",
+      "auteur": "Équipe Ramya",
+      "lecture": "5 min de lecture",
+      "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJi-3zUqof_JHWDE9QincdF2yHy0DkR5OAXGXXbM7D3HKzRrjBjclCGLbHO93Ys-3s-9zynyX6z-fl-z59reptl2QdSGkdH7pZXizgYkObwRgedCYNNuDZlchTBWDW2eblCaY7AMFnnxpB2rlG3w0HIGMZso7AF5cD3Bi86AXdIKcbhwuScfCpm47sE-NfjsmoLPw18nBr7PJe87fGD08Og9aldD3KfhjeOe8zoYVyC4hy3BiZqcFd2LST_k5wvJQC54sgKivI",
+      "resume": "Tour d'horizon des dernières innovations biométriques : reconnaissance faciale 3D, veine palmaire et lecteurs multi-facteurs adaptés aux environnements africains."
+    },
+    {
+      "id": "003",
+      "titre": "Systèmes SSI : Nouvelles Obligations en Côte d'Ivoire",
+      "cat": "Sécurité Incendie",
+      "date": "2025-02-05",
+      "auteur": "Équipe Ramya",
+      "lecture": "6 min de lecture",
+      "img": "",
+      "resume": "Un décryptage complet des nouvelles réglementations sur les Systèmes de Sécurité Incendie dans les ERP et les ERT."
+    },
+    {
+      "id": "004",
+      "titre": "L'essor des caméras thermiques pour la protection périmétrique",
+      "cat": "Vidéosurveillance",
+      "date": "2025-01-10",
+      "auteur": "Équipe Ramya",
+      "lecture": "4 min de lecture",
+      "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuDj3nXDdya0KTqxivl75sPDmnyLIO2E1ugY7sPI7W2TAxIwXtqljeWBCuXAYGTUMDr5sffLAaizGGlpyiqgH7x7sfUtpo9GUSRx2_TOAv3HVj4DXFfarimvL-PrO9kxFSXSndoBTq_lUCUkE7y_7bRy-YNPUIQp_ppqNa7zF-Ev5QNGovRAYZ34GEWx4kAzBCkW9wL2EJiZxLJafM6lcSU0q9BAiadHT0nuiKC2S1v2d4Hn_T9Orxmu7K8lOB9caxyGZRx0N2BH",
+      "resume": "Efficaces de jour comme de nuit, par temps de brouillard, les caméras thermiques deviennent incontournables pour sécuriser les vastes sites industriels en Côte d'Ivoire."
+    },
+    {
+      "id": "005",
+      "titre": "Gestion de Flotte GPS : Optimisez vos opérations logistiques",
+      "cat": "Géolocalisation",
+      "date": "2024-12-22",
+      "auteur": "Équipe Ramya",
+      "lecture": "5 min de lecture",
+      "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuCCj-tbu9HXAFhmlEzNgPrQcs52qNpSErmboOR3znZ9UNNa46iqxOXEkzoQMWA_cUigKMVv5AAEFgjiUUtBFANUqWrGjNn-zKIuFiAmXoAGFV18qQtY45enf41pfuftqsQLlDYu3gdNoWM6MhkN_o0SZiaoZr_p40ktVmKLkh5Tqca0IpKZyCQpj-HxyBZl_T7tFfAfQnffJhbD_PvJPnGN7_a98Od1Tj8eH",
+      "resume": "Comment la géolocalisation GPS peut réduire vos coûts carburant de 20%, améliorer la sécurité de vos chauffeurs et optimiser vos tournées."
+    },
+    {
+      "id": "006",
+      "titre": "Détection incendie précoce : les systèmes d'aspiration expliqués",
+      "cat": "Sécurité Incendie",
+      "date": "2024-11-08",
+      "auteur": "Équipe Ramya",
+      "lecture": "6 min de lecture",
+      "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuA92Pe7Ev8RkJhcKmdydOBDcUreN2m9IFVX0LxxSczwiNmVuv5AkkX-SBbRFUoqkNRuBluxKJW-3UrqviKEAIHwB8dZON60E5h7GqkZvjIMpgwX69mjy5EcmeaRyraERKeztu2FppibXohqutrL9HaWMTes2J4B6st7DZlhhE9sD-WFuFxzWI1A5X6bq6Rag6cQc5N3P7YDF2lT2jSjXUeJqsWxIcq7N2-wgrUFe7zeyEcO_1Nb7IWBjdzQkExh",
+      "resume": "Focus sur les systèmes de détection multiponctuelle par aspiration (DAASD), idéaux pour les salles informatiques, chambres froides et entrepôts."
+    },
+    {
+      "id": "007",
+      "titre": "Sécuriser sa villa à Abidjan : Guide complet 2025",
+      "cat": "Sécurité Résidentielle",
+      "date": "2024-10-15",
+      "auteur": "Équipe Ramya",
+      "lecture": "7 min de lecture",
+      "img": "",
+      "resume": "De la caméra de surveillance à l'interphone vidéo en passant par les alarmes périmètriques, voici comment protéger efficacement votre résidence à Cocody, Riviera ou Angré."
+    },
+    {
+      "id": "008",
+      "titre": "VMS : Gérez tous vos systèmes depuis une seule plateforme",
+      "cat": "Systèmes Intégrés",
+      "date": "2024-09-03",
+      "auteur": "Équipe Ramya",
+      "lecture": "5 min de lecture",
+      "img": "",
+      "resume": "Les plateformes de gestion vidéo (VMS) centralisées révolutionnent la surveillance multi-sites. Découvrez comment simplifier votre sécurité avec une interface unifiée."
+    }
+  ]
+}
