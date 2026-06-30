@@ -15,6 +15,21 @@ site_url: https://ramyatechnologie.netlify.app
 display_url: https://ramyatechnologie.netlify.app
 
 collections:
+  - name: parametres
+    label: "Coordonnées du site"
+    files:
+      - name: coordonnees
+        label: "Téléphone, email, adresse"
+        file: data/site.json
+        description: "Ces informations s'appliquent automatiquement sur tout le site (pied de page de chaque page)."
+        fields:
+          - { label: "Téléphone 1", name: telephone1, widget: string, required: false }
+          - { label: "Téléphone 2", name: telephone2, widget: string, required: false }
+          - { label: "Téléphone 3", name: telephone3, widget: string, required: false }
+          - { label: "Email", name: email, widget: string, required: false }
+          - { label: "Adresse (ligne 1)", name: adresse, widget: string, required: false }
+          - { label: "Ville / Pays (ligne 2)", name: ville, widget: string, required: false }
+
   - name: blog
     label: "Blog — Articles"
     files:

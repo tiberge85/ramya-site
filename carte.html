@@ -255,9 +255,9 @@
       <div>
         <h4 class="font-['Manrope'] text-sm font-bold text-white mb-4">Contact</h4>
         <ul class="space-y-3 text-sm">
-          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">location_on</span><span class="text-slate-400">813 Route d'Abatta, Cocody, Abidjan</span></li>
-          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">phone</span><span class="text-slate-400">+225 27 22 20 44 98</span></li>
-          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">mail</span><a href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400">infos@ramyatechnologie.com</a></li>
+          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">location_on</span><span class="text-slate-400" data-site="adresse">813 Route d'Abatta, Cocody, Abidjan</span></li>
+          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">phone</span><span class="text-slate-400" data-site="tel">+225 27 22 20 44 98</span></li>
+          <li class="flex gap-2 items-start"><span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:16px">mail</span><a data-site="email" href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400">infos@ramyatechnologie.com</a></li>
         </ul>
       </div>
     </div>
@@ -478,5 +478,6 @@ document.getElementById('menu-toggle').addEventListener('click',function(){
 });
 </script>
 <script>(function(){var l=document.getElementById('page-loader');if(sessionStorage.getItem('ramya_loaded')){l.style.display='none';return;}sessionStorage.setItem('ramya_loaded','1');var p=document.getElementById('loader-pct'),b=document.getElementById('loader-bar'),c=0;var iv=setInterval(function(){c+=Math.random()*10+2;if(c>=100){c=100;clearInterval(iv);setTimeout(function(){l.style.opacity='0';setTimeout(function(){l.style.display='none'},600)},400);}p.textContent=Math.floor(c)+'%';b.style.width=c+'%';},60);})();</script>
+  <script src="js/site.js"></script>
 </body>
 </html>

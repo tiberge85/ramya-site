@@ -241,15 +241,15 @@
         <ul class="space-y-4 text-sm">
           <li class="flex gap-3 items-start">
             <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">location_on</span>
-            <span class="text-slate-400">813 Route d'Abatta, Cocody<br>Abidjan, Côte d'Ivoire</span>
+            <span class="text-slate-400" data-site="adresse">813 Route d'Abatta, Cocody<br>Abidjan, Côte d'Ivoire</span>
           </li>
           <li class="flex gap-3 items-start">
             <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">phone</span>
-            <span class="text-slate-400">+225 27 22 20 44 98<br>+225 07 09 50 02 43</span>
+            <span class="text-slate-400" data-site="tel">+225 27 22 20 44 98<br>+225 07 09 50 02 43</span>
           </li>
           <li class="flex gap-3 items-start">
             <span class="material-symbols-outlined text-orange-500 shrink-0" style="font-size:18px">mail</span>
-            <a href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400 transition-colors">infos@ramyatechnologie.com</a>
+            <a data-site="email" href="mailto:infos@ramyatechnologie.com" class="text-slate-400 hover:text-orange-400 transition-colors">infos@ramyatechnologie.com</a>
           </li>
         </ul>
       </div>
@@ -409,5 +409,6 @@ function renderGrid(articles) {
 loadBlog();
 </script>
 <script>(function(){var l=document.getElementById('page-loader');if(sessionStorage.getItem('ramya_loaded')){l.style.display='none';return;}sessionStorage.setItem('ramya_loaded','1');var p=document.getElementById('loader-pct'),b=document.getElementById('loader-bar'),c=0;var iv=setInterval(function(){c+=Math.random()*10+2;if(c>=100){c=100;clearInterval(iv);setTimeout(function(){l.style.opacity='0';setTimeout(function(){l.style.display='none'},600)},400);}p.textContent=Math.floor(c)+'%';b.style.width=c+'%';},60);})();</script>
+  <script src="js/site.js"></script>
 </body>
 </html>
