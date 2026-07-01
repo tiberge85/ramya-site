@@ -75,6 +75,131 @@ collections:
               - { label: "Statistique 3 — libellé", name: stat3_label, widget: string, required: false }
               - { label: "Statistique 4 — libellé", name: stat4_label, widget: string, required: false }
               - { label: "Bandeau partenaires — titre", name: partenaires, widget: string, required: false }
+          - label: "À propos"
+            name: apropos
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Les Piliers de notre Engagement", name: t1, widget: string, required: false }
+              - { label: "Nos valeurs fondamentales guident chaque déci…", name: t2, widget: text, required: false }
+              - { label: "Innovation", name: t3, widget: string, required: false }
+              - { label: "Nous évaluons en permanence les technologies …", name: t4, widget: text, required: false }
+              - { label: "Fiabilité", name: t5, widget: string, required: false }
+              - { label: "L'intégrité de nos systèmes est non négociabl…", name: t6, widget: text, required: false }
+              - { label: "Proximité", name: t7, widget: string, required: false }
+              - { label: "Basée à Abidjan, notre équipe intervient rapi…", name: t8, widget: text, required: false }
+              - { label: "Une croissance portée par la confiance", name: t9, widget: string, required: false }
+              - { label: "Création de Ramya Technologie Innovation à Co…", name: t10, widget: text, required: false }
+              - { label: "Extension aux solutions professionnelles : co…", name: t11, widget: text, required: false }
+              - { label: "Intégration des technologies d'analyse vidéo …", name: t12, widget: text, required: false }
+              - { label: "Plus de 500 installations réalisées, 200+ cli…", name: t13, widget: text, required: false }
+              - { label: "Protégé... partout où vous êtes", name: t14, widget: string, required: false }
+              - { label: "La promesse de Ramya Technologie Innovation d…", name: t15, widget: string, required: false }
+              - { label: "Notre Équipe d'Experts", name: t16, widget: string, required: false }
+              - { label: "Des techniciens certifiés et des ingénieurs p…", name: t17, widget: text, required: false }
+              - { label: "Directeur Général", name: t18, widget: string, required: false }
+              - { label: "Direction & Stratégie", name: t19, widget: string, required: false }
+              - { label: "15+ ans dans la sécurité électronique en Afri…", name: t20, widget: text, required: false }
+              - { label: "Directrice Technique", name: t21, widget: string, required: false }
+              - { label: "Ingénierie & R&D", name: t22, widget: string, required: false }
+              - { label: "Experte en systèmes intégrés et IA vidéo.", name: t23, widget: string, required: false }
+              - { label: "Responsable Déploiement", name: t24, widget: string, required: false }
+              - { label: "Opérations Terrain", name: t25, widget: string, required: false }
+              - { label: "Coordonne toutes les installations et la main…", name: t26, widget: string, required: false }
+              - { label: "Construisons ensemble votre sécurité", name: t27, widget: string, required: false }
+              - { label: "Rejoignez les 200+ clients qui font confiance…", name: t28, widget: text, required: false }
+          - label: "Solutions"
+            name: solutions
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Notre Gamme Complète", name: t1, widget: string, required: false }
+              - { label: "Modulaires, évolutifs et garantis. Choisissez…", name: t2, widget: text, required: false }
+              - { label: "Systèmes de Vidéosurveillance", name: t3, widget: string, required: false }
+              - { label: "Caméras IP haute définition avec analyse vidé…", name: t4, widget: text, required: false }
+              - { label: "Contrôle d'Accès", name: t5, widget: string, required: false }
+              - { label: "Lecteurs biométriques, badges RFID et serrure…", name: t6, widget: text, required: false }
+              - { label: "Pointage Biométrique", name: t7, widget: string, required: false }
+              - { label: "Gestion des présences du personnel par emprei…", name: t8, widget: text, required: false }
+              - { label: "Clôture Électrique", name: t9, widget: string, required: false }
+              - { label: "Systèmes de dissuasion périmétrique haute ten…", name: t10, widget: text, required: false }
+              - { label: "Portes Blindées", name: t11, widget: string, required: false }
+              - { label: "Portes haute résistance aux tentatives d'effr…", name: t12, widget: text, required: false }
+              - { label: "Portier Vidéo", name: t13, widget: string, required: false }
+              - { label: "Interphones vidéo HD pour identifier et contr…", name: t14, widget: text, required: false }
+              - { label: "Sécurité Incendie (SSI)", name: t15, widget: string, required: false }
+              - { label: "Détecteurs de fumée, centrales d'alarme et sy…", name: t16, widget: text, required: false }
+              - { label: "Poignées Intelligentes", name: t17, widget: string, required: false }
+              - { label: "Verrous connectés pilotables via smartphone a…", name: t18, widget: text, required: false }
+              - { label: "Alarme Anti-Intrusion", name: t19, widget: string, required: false }
+              - { label: "Détecteurs de mouvement, capteurs d'ouverture…", name: t20, widget: text, required: false }
+              - { label: "Autocommutateurs PABX", name: t21, widget: string, required: false }
+              - { label: "Solutions de téléphonie d'entreprise numériqu…", name: t22, widget: text, required: false }
+              - { label: "Portiques Détecteur de Métaux", name: t23, widget: string, required: false }
+              - { label: "Archways et portiques de détection pour sécur…", name: t24, widget: text, required: false }
+              - { label: "Portes & Portails Automatisés", name: t25, widget: string, required: false }
+              - { label: "Automatisation de portes coulissantes, sectio…", name: t26, widget: text, required: false }
+              - { label: "Coffres-Forts", name: t27, widget: string, required: false }
+              - { label: "Coffres ignifuges et anti-effraction pour par…", name: t28, widget: text, required: false }
+              - { label: "Fournitures Informatiques", name: t29, widget: string, required: false }
+              - { label: "Ordinateurs, serveurs, accessoires et périphé…", name: t30, widget: text, required: false }
+              - { label: "SAS de Sécurité", name: t31, widget: string, required: false }
+              - { label: "Sas de neutralisation pour contrôler les accè…", name: t32, widget: text, required: false }
+              - { label: "Tracking Véhicule GPS", name: t33, widget: string, required: false }
+              - { label: "Balises GPS temps réel pour flottes de véhicu…", name: t34, widget: text, required: false }
+              - { label: "Réseau Informatique", name: t35, widget: string, required: false }
+              - { label: "Conception, installation et maintenance d'inf…", name: t36, widget: text, required: false }
+              - { label: "Pourquoi choisir Ramya ?", name: t37, widget: string, required: false }
+              - { label: "Depuis 2017, nous accompagnons particuliers e…", name: t38, widget: text, required: false }
+              - { label: "Innovation Constante", name: t39, widget: string, required: false }
+              - { label: "Nous utilisons les dernières technologies (IA…", name: t40, widget: text, required: false }
+              - { label: "Fiabilité Garantie", name: t41, widget: string, required: false }
+              - { label: "Nos systèmes utilisent exclusivement des équi…", name: t42, widget: text, required: false }
+              - { label: "Service de Proximité", name: t43, widget: string, required: false }
+              - { label: "Basés à Cocody, Abidjan, notre équipe intervi…", name: t44, widget: text, required: false }
+              - { label: "Prêt à sécuriser vos installations ?", name: t45, widget: string, required: false }
+              - { label: "Contactez notre équipe d'ingénieurs pour un a…", name: t46, widget: text, required: false }
+          - label: "Contact"
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Construisons votre sécurité ensemble.", name: t1, widget: string, required: false }
+              - { label: "Que vous cherchiez une solution de vidéosurve…", name: t2, widget: text, required: false }
+              - { label: "Envoyez-nous un Message", name: t3, widget: string, required: false }
+              - { label: "✓ Votre message a été envoyé ! Notre équipe v…", name: t4, widget: text, required: false }
+              - { label: "Siège Social", name: t5, widget: string, required: false }
+              - { label: "Téléphones", name: t6, widget: string, required: false }
+              - { label: "Email", name: t7, widget: string, required: false }
+              - { label: "WhatsApp", name: t8, widget: string, required: false }
+              - { label: "Contactez-nous directement sur WhatsApp pour …", name: t9, widget: text, required: false }
+              - { label: "Horaires d'Ouverture", name: t10, widget: string, required: false }
+              - { label: "Suivez-nous sur les Réseaux Sociaux", name: t11, widget: string, required: false }
+          - label: "Projets"
+            name: projets
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Projets & Réalisations", name: t1, widget: string, required: false }
+              - { label: "Découvrez comment nous sécurisons les infrast…", name: t2, widget: text, required: false }
+          - label: "Carte"
+            name: carte
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Découvrez l'étendue de notre réseau d'install…", name: t1, widget: text, required: false }
+          - label: "Blog"
+            name: blog
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Blog & Actualités", name: t1, widget: string, required: false }
+              - { label: "Restez informé des dernières tendances en mat…", name: t2, widget: text, required: false }
+              - { label: "L'Intelligence Artificielle au cœur de la nou…", name: t3, widget: text, required: false }
+              - { label: "Découvrez comment l'IA transforme les simples…", name: t4, widget: text, required: false }
+              - { label: "Contrôle d'accès biométrique : état de l'art …", name: t5, widget: string, required: false }
+              - { label: "Systèmes SSI : Nouvelles Obligations en Côte …", name: t6, widget: string, required: false }
+              - { label: "Un décryptage complet des nouvelles réglement…", name: t7, widget: text, required: false }
 
   - name: blog
     label: "Blog — Articles"
