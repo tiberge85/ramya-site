@@ -2,8 +2,8 @@ backend:
   name: github
   repo: tiberge85/ramya-site
   branch: main
-  # Portier OAuth (Cloudflare Worker) — remplace l'ancien service Netlify
-  base_url: https://ramya-cms-auth.tiberge85.workers.dev
+  # Portier OAuth (Deno Deploy) — remplace l'ancien service Netlify
+  base_url: https://happy-emu-1276.tiberge85.deno.net
   auth_endpoint: auth
 
 # Langue de l'interface
