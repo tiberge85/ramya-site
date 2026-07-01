@@ -42,6 +42,40 @@ collections:
           - { label: "— Titre Solutions (partie orange)", name: solutions_titre_accent, widget: string, required: false }
           - { label: "— Sous-titre Solutions", name: solutions_soustitre, widget: text, required: false }
 
+  - name: textes
+    label: "Textes des pages"
+    files:
+      - name: accueil
+        label: "Page Accueil"
+        file: data/textes.json
+        description: "Modifie les textes de la page d'accueil (les autres pages seront ajoutées ensuite)."
+        fields:
+          - label: "Accueil"
+            name: accueil
+            widget: object
+            fields:
+              - { label: "Section « Nos solutions » — titre", name: services_titre, widget: string, required: false }
+              - { label: "Section « Nos solutions » — texte d'intro", name: services_intro, widget: text, required: false }
+              - { label: "Carte 1 — titre", name: card1_titre, widget: string, required: false }
+              - { label: "Carte 1 — description", name: card1_desc, widget: text, required: false }
+              - { label: "Carte 2 — titre", name: card2_titre, widget: string, required: false }
+              - { label: "Carte 2 — description", name: card2_desc, widget: text, required: false }
+              - { label: "Carte 3 — titre", name: card3_titre, widget: string, required: false }
+              - { label: "Carte 3 — description", name: card3_desc, widget: text, required: false }
+              - { label: "Carte 4 — titre", name: card4_titre, widget: string, required: false }
+              - { label: "Carte 4 — description", name: card4_desc, widget: text, required: false }
+              - { label: "Carte 5 — titre", name: card5_titre, widget: string, required: false }
+              - { label: "Carte 5 — description", name: card5_desc, widget: text, required: false }
+              - { label: "Carte 6 — titre", name: card6_titre, widget: string, required: false }
+              - { label: "Carte 6 — description", name: card6_desc, widget: text, required: false }
+              - { label: "Appel à l'action — titre", name: cta_titre, widget: string, required: false }
+              - { label: "Appel à l'action — texte", name: cta_texte, widget: text, required: false }
+              - { label: "Statistique 1 — libellé", name: stat1_label, widget: string, required: false }
+              - { label: "Statistique 2 — libellé", name: stat2_label, widget: string, required: false }
+              - { label: "Statistique 3 — libellé", name: stat3_label, widget: string, required: false }
+              - { label: "Statistique 4 — libellé", name: stat4_label, widget: string, required: false }
+              - { label: "Bandeau partenaires — titre", name: partenaires, widget: string, required: false }
+
   - name: blog
     label: "Blog — Articles"
     files:

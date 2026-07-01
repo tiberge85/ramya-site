@@ -1,0 +1,25 @@
+{
+  "accueil": {
+    "services_titre": "Solutions de Sécurité Intégrées",
+    "services_intro": "Nous concevons et déployons des architectures de sécurité adaptées aux environnements résidentiels, professionnels et industriels, avec un focus sur la fiabilité et la performance.",
+    "card1_titre": "Vidéosurveillance CCTV",
+    "card1_desc": "Systèmes IP haute définition avec analyse vidéo intelligente, vision nocturne et tableau de bord centralisé pour une surveillance totale de vos locaux résidentiels et professionnels.",
+    "card2_titre": "Contrôle d'Accès",
+    "card2_desc": "Badges RFID, biométrie et serrures connectées pour sécuriser vos zones sensibles et gérer les accès en temps réel.",
+    "card3_titre": "Géolocalisation Véhicules",
+    "card3_desc": "Suivi GPS en temps réel de votre flotte automobile avec alertes, historique de trajets et gestion à distance.",
+    "card4_titre": "Sécurité Résidentielle",
+    "card4_desc": "Protection de votre domicile et de vos proches 24h/24, jour et nuit, avec alarmes intelligentes et télésurveillance.",
+    "card5_titre": "Sécurité Professionnelle",
+    "card5_desc": "Solutions complètes pour PME et grandes entreprises : bureaux, entrepôts, collaborateurs et matériels protégés.",
+    "card6_titre": "Dépannage & Maintenance",
+    "card6_desc": "Intervention rapide pour la maintenance et le dépannage de vos équipements. Disponible sur Abidjan et environs.",
+    "cta_titre": "Sécurisez votre environnement dès aujourd'hui",
+    "cta_texte": "Contactez notre équipe pour un audit gratuit de vos besoins en sécurité. Nous proposons des solutions sur mesure adaptées à votre budget et à votre environnement.",
+    "stat1_label": "Années d'Expérience",
+    "stat2_label": "Installations Réalisées",
+    "stat3_label": "Clients Satisfaits",
+    "stat4_label": "Support Technique",
+    "partenaires": "Intégration des Technologies des Leaders du Secteur"
+  }
+}
