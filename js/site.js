@@ -52,3 +52,29 @@
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
 })();
+
+// Textes éditables des pages : remplit les éléments marqués data-t="page.cle" depuis data/textes.json
+(function(){
+  if (!document.querySelector('[data-t]')) return; // rien à faire si la page n'a pas de textes gérés
+  fetch('data/textes.json', { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(t){
+      if (!t) return;
+      document.querySelectorAll('[data-t]').forEach(function(el){
+        var path = el.getAttribute('data-t').split('.');
+        var v = t;
+        for (var i = 0; i < path.length; i++) { v = v && v[path[i]]; }
+        if (v != null && v !== '') el.textContent = v;
+      });
+    })
+    .catch(function(){});
+})();
+
+// Compteur de visites (Cloudflare Web Analytics)
+(function(){
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', '{"token": "a9ef262716f6405b85014a27d6492c95"}');
+  document.head.appendChild(s);
+})();
