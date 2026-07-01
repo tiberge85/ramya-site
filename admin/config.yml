@@ -2,6 +2,9 @@ backend:
   name: github
   repo: tiberge85/ramya-site
   branch: main
+  # Portier OAuth (Cloudflare Worker) — remplace l'ancien service Netlify
+  base_url: https://ramya-cms-auth.tiberge85.workers.dev
+  auth_endpoint: /auth
 
 # Langue de l'interface
 locale: fr
@@ -11,8 +14,8 @@ media_folder: images
 public_folder: /images
 
 # Message affiché en haut de l'admin
-site_url: https://ramyatechnologie.netlify.app
-display_url: https://ramyatechnologie.netlify.app
+site_url: https://tiberge85.github.io/ramya-site/
+display_url: https://tiberge85.github.io/ramya-site/
 
 collections:
   - name: parametres
