@@ -14,8 +14,8 @@ media_folder: images
 public_folder: /images
 
 # Message affiché en haut de l'admin
-site_url: https://tiberge85.github.io/ramya-site/
-display_url: https://tiberge85.github.io/ramya-site/
+site_url: https://www.ramyaci.tech/
+display_url: https://www.ramyaci.tech/
 
 collections:
   - name: parametres
