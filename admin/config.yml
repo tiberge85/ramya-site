@@ -4,7 +4,7 @@ backend:
   branch: main
   # Portier OAuth (Cloudflare Worker) — remplace l'ancien service Netlify
   base_url: https://ramya-cms-auth.tiberge85.workers.dev
-  auth_endpoint: /auth
+  auth_endpoint: auth
 
 # Langue de l'interface
 locale: fr
