@@ -46,9 +46,9 @@ collections:
     label: "Textes des pages"
     files:
       - name: accueil
-        label: "Page Accueil"
+        label: "Textes du site (toutes les pages)"
         file: data/textes.json
-        description: "Modifie les textes de la page d'accueil (les autres pages seront ajoutées ensuite)."
+        description: "Déplie une page (Accueil, À propos, Solutions…) et modifie ses textes."
         fields:
           - label: "Accueil"
             name: accueil
