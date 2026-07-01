@@ -7,7 +7,14 @@
   <title>Administration — Ramya Technologie</title>
 </head>
 <body>
+  <div id="cms-loading" style="font-family:system-ui,sans-serif;padding:48px;text-align:center;color:#444;line-height:1.6">
+    <h2 style="margin:0 0 8px">Chargement de l'administration…</h2>
+    <p style="color:#888;font-size:14px;margin:0">Si ce message reste affiché plus de 15 secondes, le script du CMS n'a pas pu se charger (connexion / réseau).</p>
+  </div>
+  <noscript style="display:block;padding:48px;text-align:center;font-family:system-ui,sans-serif;color:#b00">
+    JavaScript est désactivé dans ce navigateur. Active-le pour utiliser l'administration.
+  </noscript>
   <!-- CMS Sveltia (compatible Decap, plus fiable) — connexion via GitHub/Worker -->
-  <script src="https://unpkg.com/@sveltia/cms@0.169.1/dist/sveltia-cms.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@sveltia/cms@0.169.1/dist/sveltia-cms.js" type="module"></script>
 </body>
 </html>
